@@ -7,6 +7,10 @@ create trigger tg_add_post after insert on curso for each row
 create trigger tg_add_comentario after insert on comentario for each row 
 	INSERT INTO atividade (tipo, data_atvd, id_usuario) VALUES ("comentario", NOW(), NEW.id);
 
+create trigger tg_add_curso after insert on curso for each row 
+	INSERT INTO atividade (tipo, data_atvd, id_usuario) VALUES ("p_curso", NOW(), NEW.id);
+
+
 
 create table usuario(
 	id bigint auto_increment not null primary key,
@@ -76,4 +80,5 @@ create table comentario_post(
 	
 );
 
+drop database enigma;
 
