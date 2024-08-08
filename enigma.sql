@@ -9,7 +9,9 @@ create trigger tg_add_comentario after insert on comentario for each row
 
 create trigger tg_add_curso after insert on curso for each row 
 	INSERT INTO atividade (tipo, data_atvd, id_usuario) VALUES ("p_curso", NOW(), NEW.id);
-
+    
+create trigger tg_add_exame after insert on curso for each row 
+	INSERT INTO atividade (tipo, data_atvd, id_usuario) VALUES ("p_exercicio", NOW(), NEW.id);
 
 
 create table usuario(
@@ -52,6 +54,7 @@ create table atividade(
     foreign key (id_usuario) references usuario(id)
 );
 
+
 create table post (
 	id int not null auto_increment primary key,
     titulo varchar(50) not null,
@@ -62,23 +65,41 @@ create table post (
 	foreign key (id_autor) references usuario(id)
 );
 
-create table comentario_post(
+create table questao(
 	id int not null auto_increment primary key,
-	id_post int not null,
-    id_usuario bigint not null,
-
-    conteudo varchar(250) not null,
+    a varchar(30) not null,
+	b varchar(30) not null,
+    c varchar(30) not null,
+    d varchar(30) not null,
+	id_resp int not null	
     
-    eh_resposta boolean DEFAULT false,
-    id_resposta int,
-    
-	foreign key (id_usuario) references usuario(id),
-    foreign key (id_post) references post(id),
-    foreign key (id_resposta) references comentario_post(id)
-    
-
-	
 );
+
+
+
+create table exame_questoes(
+	id_exame int not null,
+    id_questao int not null,
+    posicao int not null,
+    primary key (id_post, id_questao),
+    foreign key (id_post) references post(id),
+	foreign key (id_questao) references questao(id)
+);
+
+create table exame_aluno(
+	id_aluno int not null,
+    id_exame int not null,
+    posicao int not null,
+	alternativa int not null,
+    
+	primary key (id_aluno, id_exame),
+	foreign key (id_post) references post(id),
+	foreign key (id_aluno) references usuario(id)
+
+);
+
+
+
 
 drop database enigma;
 
