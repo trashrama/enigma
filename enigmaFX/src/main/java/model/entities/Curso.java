@@ -1,13 +1,19 @@
 package model.entities;
 
-import java.util.Date;
+import utils.Conversao;
+
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+
 
 public class Curso {
     private int id;
     private String titulo;
     private int id_instrutor;
     private Date data_curso;
+    private Map<Integer, String> categorias = new HashMap<>(); // hashset pq nao pode se repetir, so pode ter uma chave unica e nos valores igualmente.
 
     @Override
     public String toString() {
@@ -16,7 +22,23 @@ public class Curso {
                 ", titulo='" + titulo + '\'' +
                 ", id_instrutor=" + id_instrutor +
                 ", data_curso=" + data_curso +
+                ", categorias=" + categorias +
                 '}';
+    }
+
+    public Curso(int id, String titulo, int id_instrutor, String data_curso, Map<Integer, String> categorias) {
+        this.id = id;
+        this.titulo = titulo;
+        this.id_instrutor = id_instrutor;
+        this.data_curso = Conversao.stringParaData(data_curso);
+        this.categorias = categorias;
+    }
+
+    public Curso(String titulo, int id_instrutor, String data_curso, Map<Integer, String> categorias) {
+        this.titulo = titulo;
+        this.id_instrutor = id_instrutor;
+        this.data_curso = Conversao.stringParaData(data_curso);
+        this.categorias = categorias;
     }
 
     @Override
@@ -24,12 +46,12 @@ public class Curso {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Curso curso = (Curso) o;
-        return id == curso.id && id_instrutor == curso.id_instrutor && Objects.equals(titulo, curso.titulo) && Objects.equals(data_curso, curso.data_curso);
+        return id == curso.id && id_instrutor == curso.id_instrutor && Objects.equals(titulo, curso.titulo) && Objects.equals(data_curso, curso.data_curso) && Objects.equals(categorias, curso.categorias);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titulo, id_instrutor, data_curso);
+        return Objects.hash(id, titulo, id_instrutor, data_curso, categorias);
     }
 
     public int getId() {
@@ -56,7 +78,7 @@ public class Curso {
         this.id_instrutor = id_instrutor;
     }
 
-    public Date getData_curso() {
+    public java.sql.Date getData_curso() {
         return data_curso;
     }
 
@@ -64,10 +86,15 @@ public class Curso {
         this.data_curso = data_curso;
     }
 
-    public Curso(int id, String titulo, int id_instrutor, Date data_curso) {
-        this.id = id;
-        this.titulo = titulo;
-        this.id_instrutor = id_instrutor;
-        this.data_curso = data_curso;
+    public Map<Integer, String> getCategorias() {
+        return categorias;
+    }
+
+    public void addCategoria(int ID, String categoria) {
+        this.categorias.put(ID, categoria);
+    }
+
+    public void delCategoria(int ID){
+        this.categorias.remove(ID);
     }
 }

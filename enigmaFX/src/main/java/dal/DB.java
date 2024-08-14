@@ -3,14 +3,16 @@ package dal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class DB {
 
     static Connection conn = null;
 
     public static Connection getConnection(){
-        if (conn != null){
-            String url = "jdbc:mysql://localhost:3306";
+        if (conn == null){
+            String url = "jdbc:mysql://localhost:3306/enigma";
+
             String user = "root";
             String psswd = "99586090";
             try{
@@ -25,7 +27,7 @@ public class DB {
 
     }
 
-    private static void closeConnection(Connection c){
+    public static void closeConnection(Connection c){
         if (c != null){
             try{
                 c.close();
@@ -34,8 +36,17 @@ public class DB {
             }
         }
     }
+    public static void closeResultSet(ResultSet rs){
+        if (rs != null){
+            try{
+                rs.close();
+            }catch (Exception e){
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
-    private static void closeStatement(PreparedStatement pst){
+    public static void closeStatement(PreparedStatement pst){
         if (pst != null){
             try{
                 pst.close();

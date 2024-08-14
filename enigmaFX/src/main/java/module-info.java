@@ -10,6 +10,7 @@ module com.projetosant.enigmafx {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires mysql.connector.j;
 
     opens com.projetosant.enigmafx to javafx.fxml;
     exports com.projetosant.enigmafx;

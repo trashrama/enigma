@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface UsuarioDao {
     void inserir(Usuario u);
-    void deletar(Usuario c);
-    void atualizar(Usuario c);
-    Usuario pesquisar(Usuario c);
+    void atualizar(Usuario u, int ID);
+    void deletarPorID(int id);
+    Usuario pesquisarPorID(int ID);
     List<Usuario> listar();
 }

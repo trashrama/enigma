@@ -1,22 +1,33 @@
 package model.entities;
 
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
+import utils.Conversao;
 
 public class Usuario {
     private int id;
     private String nome;
-    private int lvl_usuario;
-    private long xp;
+    private int lvl_usuario = 0;
+    private long xp = 0;
     private Date data_nasc;
-    private boolean eh_prof;
+    private boolean eh_prof = false;
     private String login;
     private String senha;
 
-    public Usuario(String nome, long xp, Date data_nasc, boolean eh_prof, String login, String senha, int lvl_usuario, int id) {
+    public Usuario(){}
+    public Usuario(String nome, String data_nasc, String login, String senha) {
+        this.nome = nome;
+        this.data_nasc = Conversao.stringParaData(data_nasc);
+        this.login = login;
+        this.senha = senha;
+    }
+
+    public Usuario(String nome, long xp, String data_nasc, boolean eh_prof, String login, String senha, int lvl_usuario, int id) {
         this.nome = nome;
         this.xp = xp;
-        this.data_nasc = data_nasc;
+        this.data_nasc = Conversao.stringParaData(data_nasc);
         this.eh_prof = eh_prof;
         this.login = login;
         this.senha = senha;
@@ -34,7 +45,7 @@ public class Usuario {
                 ", data_nasc=" + data_nasc +
                 ", eh_prof=" + eh_prof +
                 ", login='" + login + '\'' +
-                ", senha='" + senha + '\'' +
+                ", senha='" + senha.replaceAll(".", "*") + '\'' +
                 '}';
     }
 
@@ -83,12 +94,12 @@ public class Usuario {
         this.xp = xp;
     }
 
-    public Date getData_nasc() {
+    public java.sql.Date getData_nasc() {
         return data_nasc;
     }
 
-    public void setData_nasc(Date data_nasc) {
-        this.data_nasc = data_nasc;
+    public void setData_nasc(String data_nasc) {
+        this.data_nasc = Conversao.stringParaData(data_nasc);
     }
 
     public boolean isEh_prof() {
