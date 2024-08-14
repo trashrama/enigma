@@ -26,6 +26,7 @@ public class Curso {
                 '}';
     }
 
+    public Curso (){};
     public Curso(int id, String titulo, int id_instrutor, String data_curso, Map<Integer, String> categorias) {
         this.id = id;
         this.titulo = titulo;

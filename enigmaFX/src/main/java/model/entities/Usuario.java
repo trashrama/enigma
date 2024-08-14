@@ -42,10 +42,10 @@ public class Usuario {
                 "NOME: " + nome + "\n" +
                 "LEVEL: " + lvl_usuario + "\n" +
                 "XP: " + xp + "\n" +
-                "DATA DE NASCIMENTO: " + data_nasc +
-                "PROFESSOR: " + eh_prof +
-                "LOGIN: " + login + '\'' +
-                "SENHA: " + senha.replaceAll(".", "*");
+                "DATA DE NASCIMENTO: " + Conversao.convInterDatas(data_nasc) + "\n" +
+                "PROFESSOR: " + eh_prof + "\n" +
+                "LOGIN: " + login + "\n" +
+                "SENHA: " + senha.replaceAll(".", "*") + "\n";
     }
 
     @Override
@@ -98,7 +98,7 @@ public class Usuario {
     }
 
     public void setData_nasc(String data_nasc) {
-        this.data_nasc = Conversao.stringParaData(data_nasc);
+        this.data_nasc = Conversao.stringParaData(data_nasc) ;
     }
 
     public boolean isEh_prof() {

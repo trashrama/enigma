@@ -75,9 +75,9 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             deletado = pst.executeUpdate();
 
             if (deletado > 0){
-                System.out.println("Deletado com sucesso!");
+                System.out.println("DELETADO COM SUCESSO!");
             }else{
-                System.out.println("Não foi possível deletar");
+                System.out.println("NÃO HÁ USUÁRIOS PARA SEREM DELETADOS");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -106,9 +106,9 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
 
             if (atualizado > 0){
-                System.out.println("Atualizado com sucesso!");
+                System.out.println("ATUALIZADO COM SUCESSO!");
             }else{
-                System.out.println("Atualizado com sucesso!");
+                System.out.println("ID NÃO FOI ENCONTRADO NO BANCO DE DADOS");
             }
 
 
@@ -147,7 +147,6 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             DB.closeStatement(pst);
             DB.closeResultSet(rs);
         }
-        System.out.println("achou nada doidao");
         return null;
     }
 
@@ -165,7 +164,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             while(rs.next()){
                 String Data =  Conversao.convInterDatas(rs.getDate("data_nasc"));
                 Usuario usu = new Usuario(rs.getString("nome"), rs.getInt("xp"),
-                       Data, rs.getBoolean("eh_prof"),
+                       Data, rs.getBoolean("eh_instrutor"),
                         rs.getString("login"), rs.getString("senha"),
                         rs.getInt("lvl_usuario"), rs.getInt("id"));
                 l.add(usu);
