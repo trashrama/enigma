@@ -10,7 +10,7 @@ public class Validacao {
     }
 
     public static boolean nome(String input){
-        String regex = "^[a-zA-Z]+";
+        String regex = "^[a-zA-Z]+"; // por enquanto so PEGA 1 NOME
         return input.matches(regex);
 
     }

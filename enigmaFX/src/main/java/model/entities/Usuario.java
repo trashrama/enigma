@@ -37,16 +37,15 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", lvl_usuario=" + lvl_usuario +
-                ", xp=" + xp +
-                ", data_nasc=" + data_nasc +
-                ", eh_prof=" + eh_prof +
-                ", login='" + login + '\'' +
-                ", senha='" + senha.replaceAll(".", "*") + '\'' +
-                '}';
+        return
+                "ID: " + id + "\n" +
+                "NOME: " + nome + "\n" +
+                "LEVEL: " + lvl_usuario + "\n" +
+                "XP: " + xp + "\n" +
+                "DATA DE NASCIMENTO: " + data_nasc +
+                "PROFESSOR: " + eh_prof +
+                "LOGIN: " + login + '\'' +
+                "SENHA: " + senha.replaceAll(".", "*");
     }
 
     @Override

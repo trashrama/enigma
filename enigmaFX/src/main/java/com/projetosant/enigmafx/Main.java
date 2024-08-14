@@ -7,13 +7,15 @@ import utils.Validacao;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 
 public class Main {
 
     private static void pula(){
-        System.out.print("\n\n\n\n\n");
+        System.out.print("\n\n\n\n\n\n\n");
     }
+
 
     private static void cadastraUsuario(){
         Scanner s = new Scanner(System.in);
@@ -22,27 +24,27 @@ public class Main {
 
 
         System.out.print("1. NOME: ");
-        nome = s.next();
+        nome = s.nextLine();
         while(!Validacao.nome(nome)){
             System.out.println("NOME INVÁLIDO!");
             System.out.print("1. NOME: ");
-            nome = s.next();
+            nome = s.nextLine();
         }
         u.setNome(nome);
 
         System.out.print("2. DATA DE NASCIMENTO: ");
-        dataNascimento = s.next();
+        dataNascimento = s.nextLine();
         while(!Validacao.data(dataNascimento)){
             System.out.println("DATA INVÁLIDA!");
             System.out.println("2. DATA DE NASCIMENTO: ");
-            dataNascimento = s.next();
+            dataNascimento = s.nextLine();
         }
         u.setData_nasc(dataNascimento);
 
         System.out.print("3. LOGIN: ");
         login = s.next();
         while(!Validacao.semEspaco(login)){
-            System.out.println("LOGIN INVÁLIDA!");
+            System.out.println("LOGIN INVÁLIDO!");
             System.out.println("3. LOGIN: ");
             login = s.next();
         }
@@ -66,7 +68,111 @@ public class Main {
 
 
     }
-    private static void alteraUsuario(){}
+
+    private static void alteraUsuario(){
+        pula();
+        Scanner s = new Scanner(System.in);
+        Scanner i = new Scanner(System.in);
+        Usuario u;
+
+        String nome, dataNascimento, login, senha;
+        int id;
+
+        do{
+            try{
+                System.out.print("DIGITE O ID DO USUÁRIO A SER ALTERADO: "); // se ele der mais tempo fazer uma funcao pra verificar logo se o ed existe no banco de dados
+                id = i.nextInt();
+                break;
+            }catch (InputMismatchException e){
+                System.out.println("ID INVÁLIDO. ");
+                i.next(); //descartar a entrada invalida
+            }
+        }while(true);
+
+        u = DaoFactory.createUsuarioDao().pesquisarPorID(id);
+
+        System.out.println("DIGITE \"-\" NOS CAMPOS QUE NÃO QUISER ALTERAR.");
+
+        System.out.print("1. NOME: ");
+        nome = s.nextLine();
+        if (!nome.equals("-"))
+        {
+            u.setNome(nome);
+            while(!Validacao.nome(nome)){
+                System.out.println("NOME INVÁLIDO!");
+                System.out.print("1. NOME: ");
+                nome = s.nextLine();
+                if (Validacao.nome(nome) && !nome.equals("-")){
+                    u.setNome(nome);
+                }
+            }
+        }
+
+
+
+        System.out.print("2. DATA DE NASCIMENTO: ");
+        dataNascimento = s.nextLine();
+        if (!dataNascimento.equals("-"))
+        {
+            u.setData_nasc(dataNascimento);
+            while(!Validacao.data(dataNascimento)){
+                System.out.println("DATA INVÁLIDA!");
+                System.out.println("2. DATA DE NASCIMENTO: ");
+                dataNascimento = s.nextLine();
+                if (Validacao.data(dataNascimento) && !dataNascimento.equals("-")){
+                    u.setData_nasc(nome);
+                }
+            }
+        }
+
+
+
+
+        System.out.print("3. LOGIN: ");
+        login = s.nextLine();
+        if (!login.equals("-"))
+        {
+            u.setNome(login);
+            while(!Validacao.semEspaco(login)){
+                System.out.println("LOGIN INVÁLIDO!");
+                System.out.println("3. LOGIN: ");
+                login = s.nextLine();
+                if (!Validacao.semEspaco(login)&&!login.equals("-")){
+                    break;
+                }
+            }
+        }
+
+        System.out.print("4. SENHA: ");
+        senha = s.nextLine();
+        if (!senha.equals("-"))
+        {
+            u.setNome(login);
+            while(!Validacao.semEspaco(senha)){
+                System.out.println("SENHA INVÁLIDA!");
+                System.out.println("4. SENHA: ");
+                senha = s.nextLine();
+                if (!Validacao.semEspaco(senha)&&!senha.equals("-")){
+                    break;
+                }
+            }
+        }
+
+
+        u.setLogin(login);
+
+
+        System.out.print("4. SENHA: ");
+        senha = s.next();
+        while(!Validacao.semEspaco(senha)){
+            System.out.println("SENHA INVÁLIDA!");
+            System.out.println("4. SENHA: ");
+            senha = s.next();
+        }
+        u.setSenha(senha);
+
+        DaoFactory.createUsuarioDao().inserir(u);
+    }
     private static void deletaUsuario(){}
     private static void listaUsuarios(){}
     private static void menuUsuario(){

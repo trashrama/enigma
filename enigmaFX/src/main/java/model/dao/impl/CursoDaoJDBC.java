@@ -48,7 +48,6 @@ public class CursoDaoJDBC implements CursoDao {
                 rs = pst1.getGeneratedKeys(); // retorna pra mim as chaves primarias geradas
                 if (rs.next()){
                     c.setId(rs.getInt(1));
-                    System.out.println("Adicionado com sucesso!");
                     DB.closeResultSet(rs);
                 }
 
