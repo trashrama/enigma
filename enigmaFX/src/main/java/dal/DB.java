@@ -27,10 +27,10 @@ public class DB {
 
     }
 
-    public static void closeConnection(Connection c){
-        if (c != null){
+    public static void closeConnection(){
+        if (conn != null){
             try{
-                c.close();
+                conn.close();
             }catch (Exception e){
                 throw new RuntimeException(e);
             }

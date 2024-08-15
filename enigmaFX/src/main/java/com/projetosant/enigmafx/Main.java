@@ -1,5 +1,6 @@
 package com.projetosant.enigmafx;
 
+import dal.DB;
 import model.dao.DaoFactory;
 import model.entities.Curso;
 import model.entities.Usuario;
@@ -473,6 +474,7 @@ public class Main {
                     break;
                 case 0:
                     System.out.println("1111111.OBRIGADO.POR.USAR.1111111");
+                    DB.closeConnection();
                     break;
                 default:
                     break;

@@ -18,7 +18,7 @@ create table categoria_c (
     nome varchar(30) not null unique
 );
 
-create table , (
+create table curso (
 	id int not null auto_increment primary key, 
     titulo varchar(30) not null,
     id_instrutor bigint,
@@ -31,8 +31,9 @@ create table cursos_categorias(
     id_categoria int not null,
     
     primary key (id_curso, id_categoria),
-    foreign key(id_curso) references curso(id),
-	foreign key(id_categoria) references categoria_curso(id)
+    foreign key(id_curso) references curso(id) ON DELETE CASCADE,
+	foreign key(id_categoria) references categoria_c(id)
+    
 
 );
 
@@ -147,6 +148,8 @@ INSERT INTO categoria_c (nome) VALUES ('Escrita Criativa');
 INSERT INTO categoria_c (nome) VALUES ('Educação Infantil');
 INSERT INTO categoria_c (nome) VALUES ('Culinária');
 
+use enigma;
+select * from curso;
+select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c on cc.id_categoria = c.id where cc.id_curso = 1;
 
-select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c;
-
+drop database enigma;
