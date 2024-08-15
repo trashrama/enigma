@@ -26,6 +26,18 @@ create table curso (
     foreign key (id_instrutor) references usuario(id) ON DELETE SET NULL
 );
 
+create table curso_aluno (
+	id_aluno int not null,
+    id_curso int not null,
+    
+    primary key(id_aluno,id_curso),
+    foreign key (id_aluno) references usuario(id),
+	foreign key (id_curso) references curso(id)
+
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+);
+
 create table cursos_categorias(
 	id_curso int not null auto_increment,
     id_categoria int not null,
@@ -33,7 +45,8 @@ create table cursos_categorias(
     primary key (id_curso, id_categoria),
     foreign key(id_curso) references curso(id) ON DELETE CASCADE,
 	foreign key(id_categoria) references categoria_c(id)
-    
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
 
 );
 
