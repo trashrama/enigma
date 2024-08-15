@@ -21,6 +21,6 @@ public class Validacao {
     }
 
     public static boolean num(String input){
-        return input.matches("\\d+");
+        return input.matches("^\\d+$");
     }
 }

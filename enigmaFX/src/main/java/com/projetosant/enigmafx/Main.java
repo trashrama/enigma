@@ -53,19 +53,22 @@ public class Main {
         }
         System.out.println("[0] TERMINAR");
     }
-
     private static void pula(){
         System.out.print("\n\n");
     }
-
     private static void listaCursos(){
         pula();
-        for (Curso c: DaoFactory.createCursoDao().listar()){
+        if (!DaoFactory.createCursoDao().listar().isEmpty()){
+            for (Curso c: DaoFactory.createCursoDao().listar()){
 
-            System.out.println(c.toString());
-            System.out.println("--------");
+                System.out.println(c.toString());
+                System.out.println("--------");
 
+            }
+        }else{
+            System.out.println("NÃO HÁ CURSOS REGISTRADOS");
         }
+
 
 
     }
@@ -359,11 +362,16 @@ public class Main {
     }
     private static void listaUsuarios(){
         pula();
-        for (Usuario u: DaoFactory.createUsuarioDao().listar()){
+        if (!DaoFactory.createUsuarioDao().listar().isEmpty()) {
+            for (Usuario u : DaoFactory.createUsuarioDao().listar()) {
 
-            System.out.println(u.toString());
-            System.out.println("--------");
+                System.out.println(u.toString());
+                System.out.println("--------");
 
+            }
+
+        }else{
+            System.out.println("NÃO HÁ USUÁRIOS REGISTRADOS");
         }
 
 
