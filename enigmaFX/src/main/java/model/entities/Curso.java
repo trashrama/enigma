@@ -17,13 +17,17 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", id_instrutor=" + id_instrutor +
-                ", data_curso=" + data_curso +
-                ", categorias=" + categorias +
-                '}';
+        StringBuilder cat = new StringBuilder();
+
+        for(String c: this.categorias.values()){
+            cat.append(c).append("\n");
+        }
+
+        return "ID: " + this.id + "\n" +
+                "TITULO: " + this.titulo + "\n" +
+                "DATA DO CURSO: " + Conversao.convInterDatas(this.data_curso) + "\n" + "CATEGORIAS: " + "\n" +
+                cat;
+
     }
 
     public Curso (){};
@@ -95,7 +99,5 @@ public class Curso {
         this.categorias.put(ID, categoria);
     }
 
-    public void delCategoria(int ID){
-        this.categorias.remove(ID);
-    }
+
 }

@@ -85,6 +85,7 @@ public class CursoDaoJDBC implements CursoDao {
 
             pst.setString(1, c.getTitulo());
             pst.setInt(2, c.getId_instrutor());
+            System.out.println(c.getId_instrutor());
             pst.setDate(3, c.getData_curso());
             pst.setInt(4, c.getId());
 
@@ -121,8 +122,8 @@ public class CursoDaoJDBC implements CursoDao {
                 pst.setInt(1, c.getId());
                 pst.setInt(2, id_categoria);
                 adicionado = pst.executeUpdate();
-                if (adicionado > 0)
-                    System.out.println("Categoria adicionada com sucesso!");
+                //if (adicionado > 0)
+                    //System.out.println("Categoria adicionada com sucesso!");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -158,7 +159,7 @@ public class CursoDaoJDBC implements CursoDao {
         PreparedStatement pst = null;
         ResultSet rs = null;
         Map<Integer, String> categorias = new HashMap<Integer, String>();
-        String in = "select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c where cc.id_curso = ?";
+        String in = "select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c on cc.id_categoria = c.id where cc.id_curso = ?";
         try {
             pst = conn.prepareStatement(in);
             pst.setInt(1, id);
@@ -184,7 +185,7 @@ public class CursoDaoJDBC implements CursoDao {
     @Override
     public void deletarPorID(int id) {
         PreparedStatement pst = null;
-        String del = "DELETE from curso where id_curso = ?";
+        String del = "DELETE from curso where id = ?";
         int deletado = 0;
 
         try {
@@ -224,25 +225,29 @@ public class CursoDaoJDBC implements CursoDao {
             DB.closeStatement(pst);
             DB.closeResultSet(rs);
         }
-        System.out.println("achou nada doidao");
         return null;
     }
 
     @Override
-    public Curso pesquisarPorInstrutorID(int id_instrutor) {
+    public List<Curso> pesquisarPorInstrutorID(int id_instrutor) {
         PreparedStatement pst = null;
         ResultSet rs = null;
+        List<Curso> lc = new ArrayList<Curso>();
         String in = "SELECT * from curso where id_instrutor = ?";
         try{
             pst = conn.prepareStatement(in);
             pst.setInt(1, id_instrutor);
             rs = pst.executeQuery();
 
-            if(rs.next()){
+            while(rs.next()){
                 String Data = Conversao.convInterDatas(rs.getDate("data_curso"));
-                return new Curso(rs.getInt("id"), rs.getString("titulo"),
-                        id_instrutor, Data, lerCategorias(rs.getInt("id")));
+                lc.add(new Curso(rs.getInt("id"), rs.getString("titulo"),
+                        rs.getInt("id_instrutor"), Data, lerCategorias(rs.getInt("id"))));
+
             }
+
+
+            return lc;
 
 
         } catch (Exception e) {
@@ -251,8 +256,6 @@ public class CursoDaoJDBC implements CursoDao {
             DB.closeStatement(pst);
             DB.closeResultSet(rs);
         }
-        System.out.println("achou nada doidao");
-        return null;
     }
 
     @Override
@@ -265,11 +268,12 @@ public class CursoDaoJDBC implements CursoDao {
             pst = conn.prepareStatement(in);
             rs = pst.executeQuery();
 
-            if(rs.next()){
+            while(rs.next()){
                 String Data = Conversao.convInterDatas(rs.getDate("data_curso"));
                 lc.add(new Curso(rs.getInt("id"), rs.getString("titulo"),
                         rs.getInt("id_instrutor"), Data, lerCategorias(rs.getInt("id"))));
             }
+            return lc;
 
 
         } catch (Exception e) {
@@ -278,8 +282,6 @@ public class CursoDaoJDBC implements CursoDao {
             DB.closeStatement(pst);
             DB.closeResultSet(rs);
         }
-        System.out.println("achou nada doidao");
-        return null;
     }
 }
 

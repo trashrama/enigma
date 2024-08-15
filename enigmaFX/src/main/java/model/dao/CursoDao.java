@@ -9,6 +9,6 @@ public interface CursoDao {
     void atualizar(Curso c);
     void deletarPorID(int id);
     Curso pesquisarPorID(int ID);
-    Curso pesquisarPorInstrutorID(int ID);
+    List<Curso> pesquisarPorInstrutorID(int ID);
     List<Curso> listar();
 }
