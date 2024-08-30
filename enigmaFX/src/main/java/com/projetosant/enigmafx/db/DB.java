@@ -1,4 +1,4 @@
-package dal;
+package com.projetosant.enigmafx.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

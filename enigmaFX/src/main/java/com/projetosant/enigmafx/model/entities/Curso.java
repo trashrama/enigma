@@ -1,4 +1,4 @@
-package model.entities;
+package com.projetosant.enigmafx.model.entities;
 
 import utils.Conversao;
 

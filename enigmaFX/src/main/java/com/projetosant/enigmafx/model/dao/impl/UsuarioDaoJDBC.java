@@ -1,9 +1,9 @@
-package model.dao.impl;
+package com.projetosant.enigmafx.model.dao.impl;
 
-import dal.DB;
+import com.projetosant.enigmafx.db.DB;
 import utils.Conversao;
-import model.dao.UsuarioDao;
-import model.entities.Usuario;
+import com.projetosant.enigmafx.model.dao.UsuarioDao;
+import com.projetosant.enigmafx.model.entities.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -67,11 +67,9 @@ create table post (
     titulo varchar(50) not null,
 	conteudo TEXT,
     aula longblob,
-    id_autor bigint,
     id_curso int not null,
     eh_aula boolean default false,
-	foreign key (id_curso) references curso(id) ON DELETE CASCADE,
-	foreign key (id_autor) references usuario(id) ON DELETE SET NULL
+	foreign key (id_curso) references curso(id) ON DELETE CASCADE
 );
 
 create table questao(

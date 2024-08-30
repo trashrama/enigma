@@ -1,12 +1,11 @@
 package com.projetosant.enigmafx;
 
-import dal.DB;
-import model.dao.DaoFactory;
-import model.entities.Curso;
-import model.entities.Usuario;
+import com.projetosant.enigmafx.db.DB;
+import com.projetosant.enigmafx.model.dao.DaoFactory;
+import com.projetosant.enigmafx.model.entities.Curso;
+import com.projetosant.enigmafx.model.entities.Usuario;
 import utils.Validacao;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.*;
 

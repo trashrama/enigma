@@ -1,10 +1,8 @@
-package model.dao.impl;
+package com.projetosant.enigmafx.model.dao.impl;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
-import dal.DB;
-import model.dao.CursoDao;
-import model.entities.Curso;
-import model.entities.Usuario;
+import com.projetosant.enigmafx.db.DB;
+import com.projetosant.enigmafx.model.dao.CursoDao;
+import com.projetosant.enigmafx.model.entities.Curso;
 import utils.Conversao;
 
 import java.sql.*;

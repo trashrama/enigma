@@ -1,8 +1,6 @@
-package model.entities;
+package com.projetosant.enigmafx.model.entities;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Objects;
 import utils.Conversao;
 
