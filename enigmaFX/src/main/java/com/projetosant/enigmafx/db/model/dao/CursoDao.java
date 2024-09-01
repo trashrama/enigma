@@ -1,6 +1,6 @@
-package com.projetosant.enigmafx.model.dao;
+package com.projetosant.enigmafx.db.model.dao;
 
-import com.projetosant.enigmafx.model.entities.Curso;
+import com.projetosant.enigmafx.db.model.entities.Curso;
 
 import java.util.List;
 

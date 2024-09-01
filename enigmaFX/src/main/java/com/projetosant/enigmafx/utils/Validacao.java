@@ -1,7 +1,4 @@
-package utils;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package com.projetosant.enigmafx.utils;
 
 public class Validacao {
     public static boolean semEspaco(String input){

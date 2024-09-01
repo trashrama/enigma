@@ -1,8 +1,8 @@
-package com.projetosant.enigmafx.model.dao;
+package com.projetosant.enigmafx.db.model.dao;
 
 import com.projetosant.enigmafx.db.DB;
-import com.projetosant.enigmafx.model.dao.impl.UsuarioDaoJDBC;
-import com.projetosant.enigmafx.model.dao.impl.CursoDaoJDBC;
+import com.projetosant.enigmafx.db.model.dao.impl.UsuarioDaoJDBC;
+import com.projetosant.enigmafx.db.model.dao.impl.CursoDaoJDBC;
 
 
 public class DaoFactory {

@@ -10,7 +10,8 @@ create table usuario(
     data_nasc DATETIME not null,
     eh_instrutor boolean default false not null,
     login varchar(50) not null unique,
-    senha varchar(50) not null
+    senha varchar(50) not null,
+    img longblob not null
 );
 
 create table categoria_c (
@@ -160,7 +161,7 @@ INSERT INTO categoria_c (nome) VALUES ('Educação Infantil');
 INSERT INTO categoria_c (nome) VALUES ('Culinária');
 
 use enigma;
-select * from curso;
+select * from usuario;
 select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c on cc.id_categoria = c.id where cc.id_curso = 1;
 
 drop database enigma;

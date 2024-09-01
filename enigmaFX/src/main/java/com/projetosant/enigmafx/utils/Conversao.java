@@ -1,4 +1,4 @@
-package utils;
+package com.projetosant.enigmafx.utils;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;

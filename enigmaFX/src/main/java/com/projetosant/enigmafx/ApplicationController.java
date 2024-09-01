@@ -11,11 +11,23 @@ import java.io.IOException;
 
 public class ApplicationController {
     @FXML
+    private Button btn_cadastro;
+    @FXML
     private Button btn_login;
 
     @FXML
+    private Button goBack;
+
+    @FXML
+    protected void onBtnCadastroClicked() throws IOException {
+        Application.getStagePrincipal().close();
+        Application.geraTelas("Cadastro.fxml", "Cadastro");
+    }
+
+
+    @FXML
     protected void onBtnLoginClicked() throws IOException {
-        //Application.getStagePrincipal().close();
+        Application.getStagePrincipal().close();
         Application.geraTelas("Login.fxml", "Login");
     }
 }

@@ -1,6 +1,6 @@
-package com.projetosant.enigmafx.model.entities;
+package com.projetosant.enigmafx.db.model.entities;
 
-import utils.Conversao;
+import com.projetosant.enigmafx.utils.Conversao;
 
 import java.sql.Date;
 import java.util.HashMap;

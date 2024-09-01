@@ -1,6 +1,6 @@
-package com.projetosant.enigmafx.model.dao;
+package com.projetosant.enigmafx.db.model.dao;
 
-import com.projetosant.enigmafx.model.entities.Usuario;
+import com.projetosant.enigmafx.db.model.entities.Usuario;
 import java.util.List;
 
 public interface UsuarioDao {

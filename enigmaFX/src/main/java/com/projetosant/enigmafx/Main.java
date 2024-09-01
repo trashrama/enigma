@@ -1,10 +1,9 @@
 package com.projetosant.enigmafx;
 
-import com.projetosant.enigmafx.db.DB;
-import com.projetosant.enigmafx.model.dao.DaoFactory;
-import com.projetosant.enigmafx.model.entities.Curso;
-import com.projetosant.enigmafx.model.entities.Usuario;
-import utils.Validacao;
+import com.projetosant.enigmafx.db.model.dao.DaoFactory;
+import com.projetosant.enigmafx.db.model.entities.Curso;
+import com.projetosant.enigmafx.db.model.entities.Usuario;
+import com.projetosant.enigmafx.utils.Validacao;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -481,7 +480,7 @@ public class Main {
                     break;
                 case 0:
                     System.out.println("1111111.OBRIGADO.POR.USAR.1111111");
-                    DB.closeConnection();
+                    //DB.closeConnection();
                     break;
                 default:
                     break;

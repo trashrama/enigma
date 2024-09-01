@@ -1,9 +1,9 @@
-package com.projetosant.enigmafx.model.dao.impl;
+package com.projetosant.enigmafx.db.model.dao.impl;
 
 import com.projetosant.enigmafx.db.DB;
-import utils.Conversao;
-import com.projetosant.enigmafx.model.dao.UsuarioDao;
-import com.projetosant.enigmafx.model.entities.Usuario;
+import com.projetosant.enigmafx.utils.Conversao;
+import com.projetosant.enigmafx.db.model.dao.UsuarioDao;
+import com.projetosant.enigmafx.db.model.entities.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             pst = conn.prepareStatement(in, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, u.getNome());
             pst.setDate(2, u.getData_nasc());
-            pst.setBoolean(3, u.isEh_prof());
+            pst.setBoolean(3, u.isEh_instrutor());
             pst.setString(4, u.getLogin());
             pst.setString(5, u.getSenha());
 
@@ -96,7 +96,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             pst = conn.prepareStatement(in);
             pst.setString(1, u.getNome());
             pst.setDate(2, u.getData_nasc());
-            pst.setBoolean(3, u.isEh_prof());
+            pst.setBoolean(3, u.isEh_instrutor());
             pst.setString(4, u.getLogin());
             pst.setString(5, u.getSenha());
             pst.setInt(6, ID);

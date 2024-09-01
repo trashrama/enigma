@@ -1,8 +1,8 @@
-package com.projetosant.enigmafx.model.entities;
+package com.projetosant.enigmafx.db.model.entities;
 
 import java.sql.Date;
 import java.util.Objects;
-import utils.Conversao;
+import com.projetosant.enigmafx.utils.Conversao;
 
 public class Usuario {
     private int id;
@@ -10,7 +10,7 @@ public class Usuario {
     private int lvl_usuario = 0;
     private long xp = 0;
     private Date data_nasc;
-    private boolean eh_prof = false;
+    private boolean eh_instrutor = false;
     private String login;
     private String senha;
 
@@ -22,11 +22,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Usuario(String nome, long xp, String data_nasc, boolean eh_prof, String login, String senha, int lvl_usuario, int id) {
+    public Usuario(String nome, long xp, String data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id) {
         this.nome = nome;
         this.xp = xp;
         this.data_nasc = Conversao.stringParaData(data_nasc);
-        this.eh_prof = eh_prof;
+        this.eh_instrutor = eh_instrutor;
         this.login = login;
         this.senha = senha;
         this.lvl_usuario = lvl_usuario;
@@ -41,7 +41,7 @@ public class Usuario {
                 "LEVEL: " + lvl_usuario + "\n" +
                 "XP: " + xp + "\n" +
                 "DATA DE NASCIMENTO: " + Conversao.convInterDatas(data_nasc) + "\n" +
-                "PROFESSOR: " + eh_prof + "\n" +
+                "PROFESSOR: " + eh_instrutor + "\n" +
                 "LOGIN: " + login + "\n" +
                 "SENHA: " + senha.replaceAll(".", "*") + "\n";
     }
@@ -51,12 +51,12 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return id == usuario.id && lvl_usuario == usuario.lvl_usuario && xp == usuario.xp && eh_prof == usuario.eh_prof && Objects.equals(nome, usuario.nome) && Objects.equals(data_nasc, usuario.data_nasc) && Objects.equals(login, usuario.login) && Objects.equals(senha, usuario.senha);
+        return id == usuario.id && lvl_usuario == usuario.lvl_usuario && xp == usuario.xp && eh_instrutor == usuario.eh_instrutor && Objects.equals(nome, usuario.nome) && Objects.equals(data_nasc, usuario.data_nasc) && Objects.equals(login, usuario.login) && Objects.equals(senha, usuario.senha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, lvl_usuario, xp, data_nasc, eh_prof, login, senha);
+        return Objects.hash(id, nome, lvl_usuario, xp, data_nasc, eh_instrutor, login, senha);
     }
 
     public int getId() {
@@ -99,12 +99,12 @@ public class Usuario {
         this.data_nasc = Conversao.stringParaData(data_nasc) ;
     }
 
-    public boolean isEh_prof() {
-        return eh_prof;
+    public boolean isEh_instrutor() {
+        return eh_instrutor;
     }
 
-    public void setEh_prof(boolean eh_prof) {
-        this.eh_prof = eh_prof;
+    public void seteh_instrutor(boolean eh_instrutor) {
+        this.eh_instrutor = eh_instrutor;
     }
 
     public String getLogin() {

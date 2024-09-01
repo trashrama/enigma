@@ -11,6 +11,7 @@ module com.projetosant.enigmafx {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires mysql.connector.j;
+    requires java.desktop;
 
     opens com.projetosant.enigmafx to javafx.fxml;
     exports com.projetosant.enigmafx;

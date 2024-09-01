@@ -32,7 +32,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="679.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: None;" text="cadastro">
+      <Button fx:id="btn_cadastro" layoutX="679.0" layoutY="15.0" mnemonicParsing="false" onAction="#onBtnCadastroClicked" style="-fx-background-color: None;" text="cadastro">
          <font>
             <Font name="Londona" size="19.0" />
          </font>
