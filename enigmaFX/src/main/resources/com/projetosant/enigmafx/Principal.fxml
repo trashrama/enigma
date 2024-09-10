@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.projetosant.enigmafx.Principal"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.PrincipalController">
+   <children>
+      <AnchorPane fx:id="nome_usr" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #0F319E;" AnchorPane.topAnchor="0.0">
+         <children>
+            <Circle fill="DODGERBLUE" layoutX="106.0" layoutY="92.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="usr_nome" layoutX="87.0" layoutY="159.0" text="Label" textFill="WHITE" />
+            <ProgressBar layoutX="35.0" layoutY="247.0" prefHeight="20.0" prefWidth="139.0" progress="0.0" />
+            <Label fx:id="usr_lvl" layoutX="32.0" layoutY="217.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="92.0" layoutY="267.0" text="Label" textFill="WHITE" fx:id="xp_usr">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <StackPane layoutX="200.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane fx:id="principal_pnl" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <GridPane alignment="CENTER" layoutX="207.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="385.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="179.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="206.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="btn_meus_cursos" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnMeusCursosClicked" prefHeight="41.0" prefWidth="273.0" text="Meus Cursos" textAlignment="CENTER" textFill="#0b18c9b8">
+                           <font>
+                              <Font name="Liberation Sans Bold" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                        <Label fx:id="btn_cad_curso" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnCadCursoClicked" prefHeight="34.0" prefWidth="220.0" text="Cadastrar Curso" textAlignment="CENTER" textFill="#0b18c9b8" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Liberation Sans Bold" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <Label layoutX="267.0" layoutY="88.0" text="feed" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="curso_pnl" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <Label layoutX="260.0" layoutY="32.0" text="Seus Cursos" />
+                  <ScrollPane layoutX="67.0" layoutY="76.0" prefHeight="301.0" prefWidth="500.0">
+                     <content>
+                        <TableView fx:id="pane_cursos" editable="true" prefHeight="300.0" prefWidth="500.0">
+                          <columns>
+                            <TableColumn fx:id="img_tbl_curso" editable="false" prefWidth="126.0" sortable="false" />
+                            <TableColumn fx:id="titulo_tbl_curso" minWidth="0.0" prefWidth="205.0" text="Titulo" />
+                              <TableColumn fx:id="data_tbl_curso" prefWidth="153.0" text="Data" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
 </AnchorPane>

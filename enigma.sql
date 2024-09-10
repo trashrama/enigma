@@ -11,7 +11,7 @@ create table usuario(
     eh_instrutor boolean default false not null,
     login varchar(50) not null unique,
     senha varchar(50) not null,
-    img longblob not null
+    img longblob 
 );
 
 create table categoria_c (
@@ -24,11 +24,12 @@ create table curso (
     titulo varchar(30) not null,
     id_instrutor bigint,
     data_curso DATETIME not null,
+	img longblob,
     foreign key (id_instrutor) references usuario(id) ON DELETE SET NULL
 );
 
 create table curso_aluno (
-	id_aluno int not null,
+	id_aluno bigint not null,
     id_curso int not null,
     
     primary key(id_aluno,id_curso),
@@ -108,24 +109,24 @@ create table exame_aluno(
 
 );
 
-DELIMITER //
+-- DELIMITER //
 
-CREATE TRIGGER tg_add_aula AFTER INSERT ON post 
-FOR EACH ROW 
-BEGIN
-    IF NEW.eh_aula = false THEN
-        INSERT INTO atividade (tipo, data_atvd, id_usuario) 
-        VALUES ('p_exercicio', NOW(), NEW.id_autor);
-    ELSE
-        INSERT INTO atividade (tipo, data_atvd, id_usuario) 
-        VALUES ('p_aula', NOW(), NEW.id_autor);
-    END IF;
-END //
-DELIMITER ;
+-- CREATE TRIGGER tg_add_aula AFTER INSERT ON post 
+-- FOR EACH ROW 
+-- BEGIN
+--     IF NEW.eh_aula = false THEN
+--         INSERT INTO atividade (tipo, data_atvd, id_usuario) 
+--         VALUES ('p_exercicio', NOW(), NEW.id_autor);
+--     ELSE
+--         INSERT INTO atividade (tipo, data_atvd, id_usuario) 
+--         VALUES ('p_aula', NOW(), NEW.id_instrutor);
+--     END IF;
+-- END //
+-- DELIMITER ;
 
-create trigger tg_add_curso after insert on curso for each row 
-	INSERT INTO atividade (tipo, data_atvd, id_usuario) VALUES ("p_curso", NOW(), NEW.id_instrutor);
-    
+-- create trigger tg_add_curso after insert on curso for each row 
+-- 	INSERT INTO atividade (tipo, data_atvd, id_usuario) VALUES ("p_curso", NOW(), NEW.id_instrutor);
+--     
 
 
 
@@ -164,4 +165,3 @@ use enigma;
 select * from usuario;
 select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c on cc.id_categoria = c.id where cc.id_curso = 1;
 
-drop database enigma;

@@ -3,6 +3,7 @@ package com.projetosant.enigmafx;
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.entities.Usuario;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -13,11 +14,13 @@ import javafx.stage.Stage;
 import com.projetosant.enigmafx.utils.Alerta;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
-public class LoginController extends Application {
+public class LoginController implements Initializable {
 
     @FXML
     private ImageView goBack;
@@ -61,9 +64,8 @@ public class LoginController extends Application {
                 rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    Application.usuarioLogado = new Usuario(rs.getString(1), rs.getLong(2), rs.getString(3),rs.getBoolean(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8) );
-                    DB.closeConnection(conexao);
-                    Application.geraTelas("Principal.fxml", "ENIGMA - Tela Principal");
+                    Application.usuarioLogado = new Usuario(rs.getString(1), rs.getLong(2), rs.getDate(3).toLocalDate(),rs.getBoolean(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8) );
+                    Application.geraTelas("Principal.fxml", "Tela Principal");
                 } else {
                     Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "ERRO", "Login ou senha incorretos.");
                 }
@@ -72,22 +74,17 @@ public class LoginController extends Application {
 
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw new RuntimeException(e);
         }finally{
+
             DB.closeResultSet(rs);
             DB.closeStatement(pst);
         }
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
-    public void start(Stage primaryStage) {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
-
-
 }

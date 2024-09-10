@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CadastrarCursoController">
+   <children>
+      <Label layoutX="340.0" layoutY="14.0" text="Cadastro de Curso" />
+      <Label layoutX="70.0" layoutY="77.0" text="Titulo" />
+      <Label layoutX="43.0" layoutY="100.0" text="Descricao" />
+      <TextField fx:id="curso_title" layoutX="119.0" layoutY="73.0" prefHeight="24.0" prefWidth="272.0" />
+      <TextArea fx:id="curso_desc" layoutX="119.0" layoutY="100.0" prefHeight="99.0" prefWidth="272.0" />
+      <Label layoutX="57.0" layoutY="222.0" />
+      <MenuBar layoutX="119.0" layoutY="225.0">
+        <menus>
+          <Menu fx:id="menu_categorias" mnemonicParsing="false" text="Selecione a Categoria" />
+        </menus>
+      </MenuBar>
+      <Button fx:id="btn_criar_curso" layoutX="588.0" layoutY="341.0" mnemonicParsing="false" onAction="#criarCurso" text="Criar Curso" />
+      <Pane layoutX="533.0" layoutY="73.0" prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #051138; -fx-opacity: 80%; -fx-border-width: 3;">
+         <children>
+            <ImageView fx:id="img_curso" fitHeight="150.0" fitWidth="150.0" layoutX="25.0" layoutY="43.0" onMouseClicked="#onImgCursoClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/add.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

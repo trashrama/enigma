@@ -14,7 +14,6 @@ public class ApplicationController {
     private Button btn_cadastro;
     @FXML
     private Button btn_login;
-
     @FXML
     private Button goBack;
 

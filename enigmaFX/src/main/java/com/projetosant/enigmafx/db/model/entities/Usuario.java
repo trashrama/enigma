@@ -1,6 +1,7 @@
 package com.projetosant.enigmafx.db.model.entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import com.projetosant.enigmafx.utils.Conversao;
 
@@ -9,23 +10,49 @@ public class Usuario {
     private String nome;
     private int lvl_usuario = 0;
     private long xp = 0;
-    private Date data_nasc;
+    private LocalDate data_nasc;
     private boolean eh_instrutor = false;
     private String login;
     private String senha;
+    private byte[] img = null;
 
     public Usuario(){}
-    public Usuario(String nome, String data_nasc, String login, String senha) {
+    public Usuario(String nome, LocalDate data_nasc, String login, String senha) {
         this.nome = nome;
-        this.data_nasc = Conversao.stringParaData(data_nasc);
+        this.data_nasc = data_nasc;
         this.login = login;
         this.senha = senha;
     }
 
-    public Usuario(String nome, long xp, String data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id) {
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
+
+    public void setEh_instrutor(boolean eh_instrutor) {
+        this.eh_instrutor = eh_instrutor;
+    }
+
+    public void setData_nasc(LocalDate data_nasc) {
+        this.data_nasc = data_nasc;
+    }
+
+    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img) {
+        this.nome = nome;
+        this.data_nasc = data_nasc;
+        this.login = login;
+        this.senha = senha;
+        this.img = img;
+    }
+
+
+    public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id) {
         this.nome = nome;
         this.xp = xp;
-        this.data_nasc = Conversao.stringParaData(data_nasc);
+        this.data_nasc = data_nasc;
         this.eh_instrutor = eh_instrutor;
         this.login = login;
         this.senha = senha;
@@ -40,7 +67,7 @@ public class Usuario {
                 "NOME: " + nome + "\n" +
                 "LEVEL: " + lvl_usuario + "\n" +
                 "XP: " + xp + "\n" +
-                "DATA DE NASCIMENTO: " + Conversao.convInterDatas(data_nasc) + "\n" +
+                "DATA DE NASCIMENTO: " + data_nasc + "\n" +
                 "PROFESSOR: " + eh_instrutor + "\n" +
                 "LOGIN: " + login + "\n" +
                 "SENHA: " + senha.replaceAll(".", "*") + "\n";
@@ -91,21 +118,15 @@ public class Usuario {
         this.xp = xp;
     }
 
-    public java.sql.Date getData_nasc() {
+    public LocalDate getData_nasc() {
         return data_nasc;
     }
 
-    public void setData_nasc(String data_nasc) {
-        this.data_nasc = Conversao.stringParaData(data_nasc) ;
-    }
 
     public boolean isEh_instrutor() {
         return eh_instrutor;
     }
 
-    public void seteh_instrutor(boolean eh_instrutor) {
-        this.eh_instrutor = eh_instrutor;
-    }
 
     public String getLogin() {
         return login;

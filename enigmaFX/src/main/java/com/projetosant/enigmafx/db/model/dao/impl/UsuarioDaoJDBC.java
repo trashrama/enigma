@@ -1,9 +1,12 @@
 package com.projetosant.enigmafx.db.model.dao.impl;
 
 import com.projetosant.enigmafx.db.DB;
+import com.projetosant.enigmafx.db.model.dao.DaoFactory;
+import com.projetosant.enigmafx.utils.Alerta;
 import com.projetosant.enigmafx.utils.Conversao;
 import com.projetosant.enigmafx.db.model.dao.UsuarioDao;
 import com.projetosant.enigmafx.db.model.entities.Usuario;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,48 +21,44 @@ public class UsuarioDaoJDBC implements UsuarioDao {
     }
 
     @Override
-    public void inserir(Usuario u) {
-
-        PreparedStatement pst = null;
-        int adicionado = 0;
-        ResultSet rs = null;
-
-        String in = "INSERT INTO usuario(nome, data_nasc, eh_instrutor, login, senha) VALUES (?,?,?,?,?)";
+    public boolean inserir(Usuario u) {
+        String sql = "insert into usuario(nome, data_nasc, login, senha, img) values (?,?,?,?,?)";
+        Connection conexao = DB.getConnection();
+        PreparedStatement pst;
 
         try {
-            pst = conn.prepareStatement(in, Statement.RETURN_GENERATED_KEYS);
+            pst = conexao.prepareStatement(sql);
             pst.setString(1, u.getNome());
-            pst.setDate(2, u.getData_nasc());
-            pst.setBoolean(3, u.isEh_instrutor());
-            pst.setString(4, u.getLogin());
-            pst.setString(5, u.getSenha());
+            pst.setDate(2, Date.valueOf(u.getData_nasc()));
+            pst.setString(3, u.getLogin());
+            pst.setString(4, u.getSenha());
+            pst.setBytes(5, u.getImg());
 
-            adicionado = pst.executeUpdate();
 
-            if(adicionado > 0){
-                System.out.println("Foi adicionado com sucesso!");
-                rs = pst.getGeneratedKeys();
-                if (rs.next()){
-                    u.setId(rs.getInt(1));
-                    System.out.println("Adicionado com sucesso!");
-                    DB.closeResultSet(rs);
-                }
 
-            }else{
-                System.out.println("Não foi possível inserir!");
+            int adicionado = pst.executeUpdate();
+
+            if (adicionado > 0) {
+                Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "ENIGMA - Cadastro", "Cadastro efetuado com sucesso!");
+            } else {
+                Alerta.exibirAlerta(Alert.AlertType.ERROR, "ENIGMA - Cadastro", "Não foi possível cadastrar!");
+                return false;
             }
 
 
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }finally{
-            DB.closeStatement(pst);
+
+        } catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+            Alerta.exibirAlerta(Alert.AlertType.ERROR, "ERRO",  "O usuário já está cadastrado no sistema");
+            return false;
+        } catch (Exception e) {
+            Alerta.exibirAlerta(Alert.AlertType.ERROR, "ERRO",  e.toString());
+            return false;
         }
 
-
+        return true;
     }
+
+
 
     @Override
     public void deletarPorID(int id) {
@@ -89,17 +88,18 @@ public class UsuarioDaoJDBC implements UsuarioDao {
     @Override
     public void atualizar(Usuario u, int ID) {
         PreparedStatement pst = null;
-        String in = "UPDATE usuario SET nome = ?, data_nasc = ?, eh_instrutor = ?, login = ?, senha = ? WHERE id = ?";
+        String in = "UPDATE usuario SET nome = ?, data_nasc = ?, eh_instrutor = ?, login = ?, senha = ?, img = ? WHERE id = ?";
         int atualizado = 0;
 
         try {
             pst = conn.prepareStatement(in);
             pst.setString(1, u.getNome());
-            pst.setDate(2, u.getData_nasc());
+            pst.setDate(2, Date.valueOf(u.getData_nasc()));
             pst.setBoolean(3, u.isEh_instrutor());
             pst.setString(4, u.getLogin());
             pst.setString(5, u.getSenha());
-            pst.setInt(6, ID);
+            pst.setBytes(6, u.getImg());
+            pst.setInt(7, ID);
 
             atualizado = pst.executeUpdate();
 
@@ -132,10 +132,8 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             rs = pst.executeQuery();
 
             if(rs.next()){
-                String Data =  Conversao.convInterDatas(rs.getDate("data_nasc"));
-
                 return new Usuario(rs.getString("nome"), rs.getInt("xp"),
-                        Data, rs.getBoolean("eh_instrutor"),
+                        rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"),
                         rs.getString("login"), rs.getString("senha"),
                         rs.getInt("lvl_usuario"), rs.getInt("id"));
             }
@@ -162,9 +160,8 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             rs = pst.executeQuery();
 
             while(rs.next()){
-                String Data =  Conversao.convInterDatas(rs.getDate("data_nasc"));
                 Usuario usu = new Usuario(rs.getString("nome"), rs.getInt("xp"),
-                       Data, rs.getBoolean("eh_instrutor"),
+                        rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"),
                         rs.getString("login"), rs.getString("senha"),
                         rs.getInt("lvl_usuario"), rs.getInt("id"));
                 l.add(usu);

@@ -3,17 +3,24 @@ package com.projetosant.enigmafx.db.model.entities;
 import com.projetosant.enigmafx.utils.Conversao;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static com.projetosant.enigmafx.Application.usuarioLogado;
 
 
 public class Curso {
     private int id;
     private String titulo;
     private int id_instrutor;
-    private Date data_curso;
+    private LocalDate data_curso;
     private Map<Integer, String> categorias = new HashMap<>(); // hashset pq nao pode se repetir, so pode ter uma chave unica e nos valores igualmente.
+    private byte[] img;
+    private String descricao;
+
+
 
     @Override
     public String toString() {
@@ -25,24 +32,64 @@ public class Curso {
 
         return "ID: " + this.id + "\n" +
                 "TITULO: " + this.titulo + "\n" +
-                "DATA DO CURSO: " + Conversao.convInterDatas(this.data_curso) + "\n" + "CATEGORIAS: " + "\n" +
+                "DATA DO CURSO: " + this.data_curso + "\n" + "CATEGORIAS: " + "\n" +
                 cat;
 
     }
 
     public Curso (){};
-    public Curso(int id, String titulo, int id_instrutor, String data_curso, Map<Integer, String> categorias) {
+    public Curso(int id, String titulo, int id_instrutor, LocalDate data_curso, Map<Integer, String> categorias) {
         this.id = id;
         this.titulo = titulo;
         this.id_instrutor = id_instrutor;
-        this.data_curso = Conversao.stringParaData(data_curso);
+        this.data_curso = (data_curso);
         this.categorias = categorias;
     }
 
-    public Curso(String titulo, int id_instrutor, String data_curso, Map<Integer, String> categorias) {
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+
+
+    public Curso(String titulo, String descricao, byte[] img, Map<Integer, String> categorias) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.img = img;
+        this.id_instrutor = usuarioLogado.getId();
+        this.data_curso = LocalDate.now();
+        this.categorias = categorias;
+    }
+
+    public Curso(int ID, String titulo, String descricao, byte[] img, int idInstrutor, LocalDate dt, Map<Integer, String> categorias) {
+        this.id = ID;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.img = img;
+        this.id_instrutor = idInstrutor;
+        this.data_curso = LocalDate.now();
+        this.categorias = categorias;
+    }
+
+
+
+    public Curso(String titulo, int id_instrutor, LocalDate data_curso, Map<Integer, String> categorias) {
         this.titulo = titulo;
         this.id_instrutor = id_instrutor;
-        this.data_curso = Conversao.stringParaData(data_curso);
+        this.data_curso = (data_curso);
         this.categorias = categorias;
     }
 
@@ -83,11 +130,11 @@ public class Curso {
         this.id_instrutor = id_instrutor;
     }
 
-    public java.sql.Date getData_curso() {
+    public LocalDate getData_curso() {
         return data_curso;
     }
 
-    public void setData_curso(Date data_curso) {
+    public void setData_curso(LocalDate data_curso) {
         this.data_curso = data_curso;
     }
 

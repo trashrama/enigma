@@ -27,15 +27,17 @@ public class CursoDaoJDBC implements CursoDao {
         ResultSet rs = null;
         int adicionado = 0;
 
-        String inCursos = "INSERT INTO curso(titulo, id_instrutor, data_curso) VALUES (?,?,?)";
+        String inCursos = "INSERT INTO curso(titulo, descricao, img, id_instrutor, data_curso) VALUES (?,?,?)";
 
         // tem que tratar a possivel excecao da categoria inserida, por algum motivo nao existir
         try {
             pst1 = conn.prepareStatement(inCursos, Statement.RETURN_GENERATED_KEYS);
 
             pst1.setString(1, c.getTitulo());
-            pst1.setInt(2, c.getId_instrutor());
-            pst1.setDate(3, c.getData_curso());
+            pst1.setString(2, c.getDescricao());
+            pst1.setBytes(3, c.getImg());
+            pst1.setInt(4, c.getId_instrutor());
+            pst1.setDate(5, Date.valueOf(c.getData_curso()));
 
 
 
@@ -75,7 +77,7 @@ public class CursoDaoJDBC implements CursoDao {
         int adicionado = 0;
         int deletado = 0;
 
-        String in = "UPDATE curso SET titulo = ?, id_instrutor = ?, data_curso = ? where id = ?";
+        String in = "UPDATE curso SET titulo = ?, id_instrutor = ?, data_curso = ?, desc = ?, img = ? where id = ?";
 
         // tem que tratar a possivel excecao da categoria inserida, por algum motivo nao existir
         try {
@@ -83,9 +85,10 @@ public class CursoDaoJDBC implements CursoDao {
 
             pst.setString(1, c.getTitulo());
             pst.setInt(2, c.getId_instrutor());
-            System.out.println(c.getId_instrutor());
-            pst.setDate(3, c.getData_curso());
-            pst.setInt(4, c.getId());
+            pst.setDate(3, Date.valueOf(c.getData_curso()));
+            pst.setString(4, c.getDescricao());
+            pst.setBytes(5, c.getImg());
+            pst.setInt(6, c.getId());
 
 
             adicionado = pst.executeUpdate();
@@ -211,9 +214,8 @@ public class CursoDaoJDBC implements CursoDao {
             rs = pst.executeQuery();
 
             if(rs.next()){
-                String Data = Conversao.convInterDatas(rs.getDate("data_curso"));
                 return new Curso(ID, rs.getString("titulo"),
-                        rs.getInt("id_instrutor"), Data, lerCategorias(ID));
+                        rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), lerCategorias(ID));
             }
 
 
@@ -238,9 +240,9 @@ public class CursoDaoJDBC implements CursoDao {
             rs = pst.executeQuery();
 
             while(rs.next()){
-                String Data = Conversao.convInterDatas(rs.getDate("data_curso"));
+
                 lc.add(new Curso(rs.getInt("id"), rs.getString("titulo"),
-                        rs.getInt("id_instrutor"), Data, lerCategorias(rs.getInt("id"))));
+                        rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), lerCategorias(rs.getInt("id"))));
 
             }
 
@@ -267,9 +269,8 @@ public class CursoDaoJDBC implements CursoDao {
             rs = pst.executeQuery();
 
             while(rs.next()){
-                String Data = Conversao.convInterDatas(rs.getDate("data_curso"));
-                lc.add(new Curso(rs.getInt("id"), rs.getString("titulo"),
-                        rs.getInt("id_instrutor"), Data, lerCategorias(rs.getInt("id"))));
+                lc.add(new Curso(rs.getInt("id"), rs.getString("titulo"), rs.getString("descricao"), rs.getBytes("img"),
+                        rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), lerCategorias(rs.getInt("id"))));
             }
             return lc;
 
