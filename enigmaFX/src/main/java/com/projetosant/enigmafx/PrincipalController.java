@@ -90,8 +90,11 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void onBtnMeusCursosClicked() throws IOException {
-        curso_pnl.setVisible(true);
-        principal_pnl.setVisible(false);
+        if (Application.usuarioLogado.isEh_instrutor()){
+            curso_pnl.setVisible(true);
+            principal_pnl.setVisible(false);
+        }
+
     }
 
     @FXML
