@@ -29,4 +29,6 @@ public class ApplicationController {
         Application.getStagePrincipal().close();
         Application.geraTelas("Login.fxml", "Login");
     }
+
+
 }

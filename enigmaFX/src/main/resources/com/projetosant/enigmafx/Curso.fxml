@@ -6,20 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Curso">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CursoController">
    <children>
-      <ImageView fitHeight="250.0" fitWidth="200.0" layoutX="54.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="254.0" layoutY="56.0" text="Label">
+      <ImageView fx:id="curso_img" fitHeight="250.0" fitWidth="200.0" layoutX="34.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="curso_titulo" layoutX="254.0" layoutY="56.0" text="Label">
          <font>
             <Font name="DejaVu Sans Mono Bold" size="32.0" />
          </font>
       </Label>
-      <Label layoutX="254.0" layoutY="106.0" text="Label" />
-      <Label layoutX="254.0" layoutY="148.0" prefHeight="127.0" prefWidth="345.0" text="Label" />
-      <Label layoutX="254.0" layoutY="132.0" text="Label" />
-      <Button layoutX="555.0" layoutY="300.0" mnemonicParsing="false" text="Modificar" />
-      <Button layoutX="649.0" layoutY="300.0" mnemonicParsing="false" text="Deletar" />
-      <Button layoutX="678.0" layoutY="26.0" mnemonicParsing="false" text="Add Post" />
+      <Label fx:id="curso_categorias" layoutX="254.0" layoutY="106.0" text="Label" />
+      <Label fx:id="curso_desc" layoutX="254.0" layoutY="148.0" prefHeight="127.0" prefWidth="345.0" text="Label" />
+      <Label fx:id="curso_data" layoutX="254.0" layoutY="132.0" text="Label" />
+      <Button fx:id="btn_mod_curso" layoutX="555.0" layoutY="300.0" mnemonicParsing="false" text="Modificar" />
+      <Button fx:id="btn_del_curso" layoutX="649.0" layoutY="300.0" mnemonicParsing="false" text="Deletar" />
+      <Button fx:id="btn_add_post" layoutX="678.0" layoutY="26.0" mnemonicParsing="false" text="Add Post" />
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
@@ -33,11 +34,12 @@
                   <Font size="10.0" />
                </font>
             </Label>
+            <Button fx:id="btn_sair" layoutX="83.0" layoutY="343.0" mnemonicParsing="false" onAction="#onBtnSairClicked" text="Sair" />
          </children>
       </AnchorPane>
       <StackPane layoutX="200.0" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <AnchorPane fx:id="principal_pnl" prefHeight="400.0" prefWidth="600.0" visible="false">
+            <AnchorPane fx:id="principal_pnl" prefHeight="400.0" prefWidth="600.0">
                <children>
                   <GridPane alignment="CENTER" layoutX="207.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="385.0">
                     <columnConstraints>
@@ -69,17 +71,20 @@
                   <Label layoutX="267.0" layoutY="88.0" text="feed" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="curso_pnl" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="curso_pnl" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="260.0" layoutY="32.0" text="Seus Cursos" />
                   <ScrollPane layoutX="67.0" layoutY="76.0" prefHeight="301.0" prefWidth="500.0">
                      <content>
-                        <TableView fx:id="pane_cursos" editable="true" prefHeight="300.0" prefWidth="500.0">
+                        <TableView fx:id="tbl_cursos" editable="true" onMouseClicked="#onTblCursosClicked" prefHeight="300.0" prefWidth="500.0">
                           <columns>
                             <TableColumn fx:id="img_tbl_curso" editable="false" prefWidth="126.0" sortable="false" />
                             <TableColumn fx:id="titulo_tbl_curso" minWidth="0.0" prefWidth="205.0" text="Titulo" />
                               <TableColumn fx:id="data_tbl_curso" prefWidth="153.0" text="Data" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </content>
                   </ScrollPane>
@@ -87,6 +92,9 @@
                      <image>
                         <Image url="@assets/volte-white.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
             </AnchorPane>

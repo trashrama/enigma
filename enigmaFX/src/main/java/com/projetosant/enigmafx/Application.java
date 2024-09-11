@@ -1,6 +1,7 @@
 package com.projetosant.enigmafx;
 
 import com.projetosant.enigmafx.db.DB;
+import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.db.model.entities.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,10 +51,14 @@ public class Application extends javafx.application.Application {
         stagePrincipal.show();
     }
 
-    public static void invocaTelas(String url, String titulo) throws IOException {
+    public static void invocaCurso(String url, String titulo, Curso c) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(url));
         Scene scene = new Scene(fxmlLoader.load());
+
+        CursoController controller = fxmlLoader.getController();
+        controller.setCurso(c);
+
         stage.setTitle("ENIGMA - "+titulo);
         stage.setScene(scene);
         stage.setResizable(false);

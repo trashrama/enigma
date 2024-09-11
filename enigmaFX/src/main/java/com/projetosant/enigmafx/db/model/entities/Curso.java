@@ -4,6 +4,7 @@ import com.projetosant.enigmafx.utils.Conversao;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -140,6 +141,11 @@ public class Curso {
 
     public Map<Integer, String> getCategorias() {
         return categorias;
+    }
+
+    public String listaCategorias() {
+        Collection<String> f = categorias.values();
+        return String.join(", ", f);
     }
 
     public void addCategoria(int ID, String categoria) {

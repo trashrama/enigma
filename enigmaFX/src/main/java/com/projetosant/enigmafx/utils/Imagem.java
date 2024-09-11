@@ -13,11 +13,10 @@ public class Imagem {
 
     public static WritableImage bytesToImg(byte[] img) {
         try{
-            System.out.println(img);
             ByteArrayInputStream by = new ByteArrayInputStream(img);
             return SwingFXUtils.toFXImage(ImageIO.read(by), null);
 
-        } catch (IOException e) {
+        } catch (NullPointerException | IOException np) {
             return null;
 
         }

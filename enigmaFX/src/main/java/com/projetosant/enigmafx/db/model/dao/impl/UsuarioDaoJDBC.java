@@ -22,7 +22,8 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
     @Override
     public boolean inserir(Usuario u) {
-        String sql = "insert into usuario(nome, data_nasc, login, senha, img, eh_instrutor) values (?,?,?,?,?)";
+        System.out.println(u.isEh_instrutor());
+        String sql = "insert into usuario(nome, data_nasc, login, senha, img, eh_instrutor) values (?,?,?,?,?,?)";
         Connection conexao = DB.getConnection();
         PreparedStatement pst;
 
