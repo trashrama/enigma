@@ -25,6 +25,7 @@ create table curso (
     id_instrutor bigint,
     data_curso DATETIME not null,
 	img longblob,
+    descricao TEXT,
     foreign key (id_instrutor) references usuario(id) ON DELETE SET NULL
 );
 
@@ -163,5 +164,37 @@ INSERT INTO categoria_c (nome) VALUES ('Culinária');
 
 use enigma;
 select * from usuario;
-select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c on cc.id_categoria = c.id where cc.id_curso = 1;
+select * from cursos_categorias;
 
+select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c on cc.id_categoria = c.id where cc.id_curso = 1;
+-- Exemplo 1
+INSERT INTO curso (titulo, id_instrutor, data_curso, img, descricao) 
+VALUES ('Curso de Java Básico', 1, '2024-10-01 09:00:00', NULL, 'Este é um curso introdutório de Java, cobrindo conceitos básicos.');
+
+-- Exemplo 2
+INSERT INTO curso (titulo, id_instrutor, data_curso, img, descricao) 
+VALUES ('Curso de Desenvolvimento Web', 1, '2024-10-15 14:00:00', NULL, 'Curso focado no desenvolvimento de aplicações web com HTML, CSS e JavaScript.');
+
+-- Exemplo 3
+INSERT INTO curso (titulo, id_instrutor, data_curso, img, descricao) 
+VALUES ('Curso de Banco de Dados', 1, '2024-11-01 10:00:00', NULL, 'Este curso aborda o design e a administração de bancos de dados relacionais.');
+
+-- Exemplo 4
+INSERT INTO curso (titulo, id_instrutor, data_curso, img, descricao) 
+VALUES ('Curso de Python Avançado', 1, '2024-12-01 16:00:00', NULL, 'Curso avançado de Python, cobrindo tópicos como análise de dados e desenvolvimento de APIs.');
+
+-- Exemplo 5
+INSERT INTO curso (titulo, id_instrutor, data_curso, img, descricao) 
+VALUES ('Curso de UX/UI Design', 1, '2024-12-15 13:00:00', NULL, 'Curso sobre design de experiência do usuário e interface do usuário, incluindo práticas e ferramentas.');
+
+-- Exemplo 6 (com uma imagem binária fictícia)
+INSERT INTO curso (titulo, id_instrutor, data_curso, img, descricao) 
+VALUES ('Curso de Segurança da Informação', 1, '2024-11-20 11:00:00', 'Seu_blob_de_imagem_aqui', 'Curso detalhado sobre técnicas e práticas de segurança da informação.');
+
+-- Exemplo 7 (com uma descrição mais longa)
+INSERT INTO curso (titulo, id_instrutor, data_curso, img, descricao) 
+VALUES ('Curso de Machine Learning', 1, '2024-10-20 18:00:00', NULL, 'Neste curso, exploraremos técnicas avançadas de Machine Learning, incluindo redes neurais, algoritmos de classificação e regressão, e a aplicação dessas técnicas em problemas do mundo real.');
+
+
+
+drop database enigma;

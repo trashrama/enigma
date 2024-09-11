@@ -20,7 +20,7 @@ public class ApplicationController {
     @FXML
     protected void onBtnCadastroClicked() throws IOException {
         Application.getStagePrincipal().close();
-        Application.geraTelas("Cadastro.fxml", "Cadastro");
+        Application.geraTelas("CadastroUsuario.fxml", "Cadastro");
     }
 
 

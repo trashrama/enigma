@@ -4,7 +4,6 @@ import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.utils.Alerta;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -107,6 +106,11 @@ public class CadastrarCursoController implements Initializable {
 
 
     }
+    @FXML
+    protected void onClickedGoBack(MouseEvent mouseEvent) throws IOException {
+        Application.geraTelas("Principal.fxml", "Tela Principal");
+
+    }
 
     private byte[] imgToBytes() throws IOException {
 
@@ -115,6 +119,7 @@ public class CadastrarCursoController implements Initializable {
         }
         return null;
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

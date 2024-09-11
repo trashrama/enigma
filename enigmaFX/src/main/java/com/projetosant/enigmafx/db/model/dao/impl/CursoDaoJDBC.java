@@ -3,6 +3,7 @@ package com.projetosant.enigmafx.db.model.dao.impl;
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.CursoDao;
 import com.projetosant.enigmafx.db.model.entities.Curso;
+import com.projetosant.enigmafx.db.model.entities.Post;
 import com.projetosant.enigmafx.utils.Conversao;
 
 import java.sql.*;
@@ -27,7 +28,7 @@ public class CursoDaoJDBC implements CursoDao {
         ResultSet rs = null;
         int adicionado = 0;
 
-        String inCursos = "INSERT INTO curso(titulo, descricao, img, id_instrutor, data_curso) VALUES (?,?,?)";
+        String inCursos = "INSERT INTO curso(titulo, descricao, img, id_instrutor, data_curso) VALUES (?,?,?,?,?)";
 
         // tem que tratar a possivel excecao da categoria inserida, por algum motivo nao existir
         try {
@@ -273,6 +274,30 @@ public class CursoDaoJDBC implements CursoDao {
                         rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), lerCategorias(rs.getInt("id"))));
             }
             return lc;
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            DB.closeStatement(pst);
+            DB.closeResultSet(rs);
+        }
+    }
+
+    public List<Post> listarPosts(int idCurso) {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String in = "SELECT * from post where id_curso = ?";
+        List<Post> lp = new ArrayList<>();
+        try{
+            pst = conn.prepareStatement(in);
+            pst.setInt(1,idCurso);
+            rs = pst.executeQuery();
+
+            while(rs.next()){
+                lp.add(new Post(rs.getInt("id"), rs.getString("titulo"), rs.getString("conteudo"), rs.getBytes("aula"), rs.getInt("id_"),rs.getBoolean("eh_aula")));
+            }
+            return lp;
 
 
         } catch (Exception e) {

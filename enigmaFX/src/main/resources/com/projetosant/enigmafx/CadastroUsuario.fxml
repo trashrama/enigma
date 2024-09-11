@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CadastroController">
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CadastroUsuarioController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="820.0">
          <image>
@@ -96,5 +96,6 @@
             </ImageView>
          </children>
       </Pane>
+      <Button fx:id="btn_sou_instrutor" layoutX="356.0" layoutY="76.0" mnemonicParsing="false" onAction="#onClickedSouInstrutor" text="Sou Instrutor" />
    </children>
 </AnchorPane>

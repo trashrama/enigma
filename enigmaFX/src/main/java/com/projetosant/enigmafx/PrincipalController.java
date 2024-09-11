@@ -3,17 +3,23 @@ package com.projetosant.enigmafx;
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Curso;
+import com.projetosant.enigmafx.utils.Imagem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -34,8 +40,6 @@ public class PrincipalController implements Initializable {
     @FXML
     private Label btn_meus_cursos;
 
-    @FXML
-    private ImageView img_cur;
 
     @FXML
     private AnchorPane curso_pnl;
@@ -55,7 +59,8 @@ public class PrincipalController implements Initializable {
     @FXML
     private TableColumn<Curso, String> titulo_tbl_curso;
 
-    private File fileImg = null;
+    @FXML
+    private Circle usr_img;
 
     @FXML
     private Label usr_lvl;
@@ -65,6 +70,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private Label xp_usr;
+
 
 
     @FXML
@@ -80,20 +86,37 @@ public class PrincipalController implements Initializable {
     }
 
     private void popularCursos() throws IOException {
+        //img_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("imagem"));
+        titulo_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        data_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("data_curso"));
+
         ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().listar());
 
-        System.out.println(cursos);
         pane_cursos.setItems(cursos);
 
 
     }
 
+    @FXML
+    public void onClickedGoBack(MouseEvent mouseEvent) throws IOException {
+        curso_pnl.setVisible(false);
+        principal_pnl.setVisible(true);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            WritableImage i = Imagem.bytesToImg(Application.usuarioLogado.getImg());
+            if (i != null)
+            usr_img.setFill(new ImagePattern(i));
+            else
+
+            //usr_img.setFill(new ImagePattern());
+
             usr_nome.setText(Application.usuarioLogado.getNome());
-            usr_lvl.setText(String.valueOf(Application.usuarioLogado.getLvl_usuario()));
-            xp_usr.setText(String.valueOf(Application.usuarioLogado.getXp()));
+            usr_lvl.setText("LVL: " + String.valueOf(Application.usuarioLogado.getLvl_usuario()));
+            xp_usr.setText("XP: " + String.valueOf(Application.usuarioLogado.getXp()));
+
 
             popularCursos();
         } catch (IOException e) {

@@ -22,7 +22,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
     @Override
     public boolean inserir(Usuario u) {
-        String sql = "insert into usuario(nome, data_nasc, login, senha, img) values (?,?,?,?,?)";
+        String sql = "insert into usuario(nome, data_nasc, login, senha, img, eh_instrutor) values (?,?,?,?,?)";
         Connection conexao = DB.getConnection();
         PreparedStatement pst;
 
@@ -33,6 +33,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             pst.setString(3, u.getLogin());
             pst.setString(4, u.getSenha());
             pst.setBytes(5, u.getImg());
+            pst.setBoolean(6, u.isEh_instrutor());
 
 
 
@@ -135,7 +136,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
                 return new Usuario(rs.getString("nome"), rs.getInt("xp"),
                         rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"),
                         rs.getString("login"), rs.getString("senha"),
-                        rs.getInt("lvl_usuario"), rs.getInt("id"));
+                        rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"));
             }
 
 
@@ -163,7 +164,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
                 Usuario usu = new Usuario(rs.getString("nome"), rs.getInt("xp"),
                         rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"),
                         rs.getString("login"), rs.getString("senha"),
-                        rs.getInt("lvl_usuario"), rs.getInt("id"));
+                        rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"));
                 l.add(usu);
             }
 

@@ -49,7 +49,7 @@ public class LoginController implements Initializable {
 
     @FXML
     public void onLogar(){
-        String sql = "select nome, xp, data_nasc, eh_instrutor, login, senha, lvl_usuario, id from usuario where login=? and senha=?";
+        String sql = "select nome, xp, data_nasc, eh_instrutor, login, senha, lvl_usuario, id, img from usuario where login=? and senha=?";
         Connection conexao = DB.getConnection();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
                 rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    Application.usuarioLogado = new Usuario(rs.getString(1), rs.getLong(2), rs.getDate(3).toLocalDate(),rs.getBoolean(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getInt(8) );
+                    Application.usuarioLogado = new Usuario(rs.getString("nome"), rs.getLong("xp"), rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"), rs.getString("login"), rs.getString("senha"), rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"));
                     Application.geraTelas("Principal.fxml", "Tela Principal");
                 } else {
                     Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "ERRO", "Login ou senha incorretos.");

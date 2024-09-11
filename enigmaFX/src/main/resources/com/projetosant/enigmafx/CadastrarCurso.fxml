@@ -42,5 +42,10 @@
             </ImageView>
          </children>
       </Pane>
+      <ImageView fx:id="goBack" fitHeight="32.0" fitWidth="36.0" layoutX="32.0" layoutY="10.0" onMouseClicked="#onClickedGoBack" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="229.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="29.0">
+         <image>
+            <Image url="@assets/volte-white.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

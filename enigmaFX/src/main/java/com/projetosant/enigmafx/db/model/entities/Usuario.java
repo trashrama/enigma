@@ -40,16 +40,18 @@ public class Usuario {
         this.data_nasc = data_nasc;
     }
 
-    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img) {
+
+
+    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img, boolean ehInstrutor) {
         this.nome = nome;
         this.data_nasc = data_nasc;
         this.login = login;
         this.senha = senha;
         this.img = img;
+        this.eh_instrutor = ehInstrutor;
     }
 
-
-    public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id) {
+    public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id, byte[] img) {
         this.nome = nome;
         this.xp = xp;
         this.data_nasc = data_nasc;
@@ -58,6 +60,8 @@ public class Usuario {
         this.senha = senha;
         this.lvl_usuario = lvl_usuario;
         this.id = id;
+        this.img = img;
+
     }
 
     @Override
