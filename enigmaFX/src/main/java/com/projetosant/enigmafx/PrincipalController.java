@@ -72,7 +72,6 @@ public class PrincipalController implements Initializable {
     private Label xp_usr;
 
 
-
     @FXML
     private void onBtnCadCursoClicked() throws IOException {
         Application.geraTelas("CadastrarCurso.fxml", "Cadastrar Curso");
@@ -98,8 +97,6 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
-
-
     private void popularCursos() throws IOException {
         img_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("img"));
 
@@ -122,17 +119,23 @@ public class PrincipalController implements Initializable {
         });
 
         img_tbl_curso.setPrefWidth(100);
-
-
         titulo_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         data_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("data_curso"));
 
-        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().listar());
-
+        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().pesquisarPorID(Application.usuarioLogado.getId()));
         tbl_cursos.setItems(cursos);
 
 
     }
+
+    @FXML
+    private void catalogoCursos() throws IOException {
+        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().pesquisarPorID(Application.usuarioLogado.getId()));
+        tbl_cursos.setItems(cursos);
+
+
+    }
+
 
     @FXML
     private void onClickedGoBack(MouseEvent mouseEvent) throws IOException {

@@ -241,10 +241,8 @@ public class CursoDaoJDBC implements CursoDao {
             rs = pst.executeQuery();
 
             while(rs.next()){
-
-                lc.add(new Curso(rs.getInt("id"), rs.getString("titulo"),
+                lc.add(new Curso(rs.getInt("id"), rs.getString("titulo"), rs.getString("descricao"), rs.getBytes("img"),
                         rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), lerCategorias(rs.getInt("id"))));
-
             }
 
 
