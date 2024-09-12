@@ -3,6 +3,7 @@ package com.projetosant.enigmafx;
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Curso;
+import com.projetosant.enigmafx.db.model.entities.Post;
 import com.projetosant.enigmafx.utils.Imagem;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -94,6 +95,8 @@ public class PrincipalController implements Initializable {
     @FXML
     private Button btn_mod_curso;
 
+    @FXML
+    private ListView<Post> feed;
 
     @FXML
     private void onBtnCadCursoClicked() throws IOException {

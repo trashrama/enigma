@@ -166,9 +166,15 @@ use enigma;
 select * from usuario;
 select titulo, nome from cursos_categorias cc inner join curso c on c.id = cc.id_curso inner join categoria_c cat on cat.id = cc.id_categoria;
 
+select * from curso_aluno;
 select cc.id_categoria, c.nome from cursos_categorias cc inner join categoria_c c on cc.id_categoria = c.id where cc.id_curso = 1;
 
+
+INSERT INTO post (titulo, conteudo, id_curso, data_post)
+VALUES
+    ('Introdução ao SQL', 'Neste post, abordaremos o básico sobre SQL, incluindo criação de tabelas, inserção de dados, e consultas básicas.', 1, '2024-09-10 10:00:00');
+
 -- selecionar posts pro feed
-SELECT * from post p inner join curso_aluno ca on p.id_curso = ca.id_curso where ca.id_aluno = 1 order by ;
+SELECT * from post p inner join curso_aluno ca on p.id_curso = ca.id_curso where ca.id_aluno = 1 order by data_nasc;
 
 drop database enigma;
