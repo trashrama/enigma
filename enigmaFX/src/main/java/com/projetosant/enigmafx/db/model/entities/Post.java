@@ -13,13 +13,14 @@ public class Post {
     private boolean eh_aula;
     private LocalDate data_post = LocalDate.now();
 
-    public Post(int id, String titulo, String conteudo, byte[] aula, int id_curso, boolean eh_aula) {
+    public Post(int id, String titulo, String conteudo, byte[] aula, int id_curso, boolean eh_aula, LocalDate data_post) {
         this.id = id;
         this.titulo = titulo;
         this.conteudo = conteudo;
         this.aula = aula;
         this.id_curso = id_curso;
         this.eh_aula = eh_aula;
+        this.data_post = data_post;
     }
 
     @Override
@@ -73,5 +74,13 @@ public class Post {
 
     public void setEh_aula(boolean eh_aula) {
         this.eh_aula = eh_aula;
+    }
+
+    public LocalDate getData_post() {
+        return data_post;
+    }
+
+    public void setData_post(LocalDate data_post) {
+        this.data_post = data_post;
     }
 }

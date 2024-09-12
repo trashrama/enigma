@@ -345,29 +345,7 @@ public class CursoDaoJDBC implements CursoDao {
         }
     }
 
-    public List<Post> listarPosts(int idCurso) {
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        String in = "SELECT * from post where id_curso = ?";
-        List<Post> lp = new ArrayList<>();
-        try{
-            pst = conn.prepareStatement(in);
-            pst.setInt(1,idCurso);
-            rs = pst.executeQuery();
 
-            while(rs.next()){
-                lp.add(new Post(rs.getInt("id"), rs.getString("titulo"), rs.getString("conteudo"), rs.getBytes("aula"), rs.getInt("id_"),rs.getBoolean("eh_aula")));
-            }
-            return lp;
-
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }finally {
-            DB.closeStatement(pst);
-            DB.closeResultSet(rs);
-        }
-    }
 }
 
 

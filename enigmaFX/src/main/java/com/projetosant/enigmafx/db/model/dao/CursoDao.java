@@ -13,7 +13,6 @@ public interface CursoDao {
     Curso pesquisarPorID(int ID);
     List<Curso> pesquisarPorInstrutorID(int ID);
     List<Curso> listar();
-    List<Post> listarPosts(int idCurso);
     int quantidadeAlunos(int ID);
     boolean matriculaUsuario(Curso c, Usuario u);
     boolean desmatriculaUsuario(Curso c, Usuario u);
