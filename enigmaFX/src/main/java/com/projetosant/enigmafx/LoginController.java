@@ -1,6 +1,7 @@
 package com.projetosant.enigmafx;
 
 import com.projetosant.enigmafx.db.DB;
+import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,7 +65,7 @@ public class LoginController implements Initializable {
                 rs = pst.executeQuery();
 
                 if (rs.next()) {
-                    Application.usuarioLogado = new Usuario(rs.getString("nome"), rs.getLong("xp"), rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"), rs.getString("login"), rs.getString("senha"), rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"));
+                    Application.usuarioLogado = new Usuario(rs.getString("nome"), rs.getLong("xp"), rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"), rs.getString("login"), rs.getString("senha"), rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"), DaoFactory.createUsuarioDao().getInscricoes(rs.getInt("id")));
                     Application.geraTelas("Principal.fxml", "Tela Principal");
                 } else {
                     Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "ERRO", "Login ou senha incorretos.");

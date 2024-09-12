@@ -4,11 +4,14 @@ import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.utils.Imagem;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -22,6 +25,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.spreadsheet.Grid;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +36,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static com.projetosant.enigmafx.Application.invocaCurso;
+
 public class PrincipalController implements Initializable {
 
     @FXML
@@ -40,6 +46,8 @@ public class PrincipalController implements Initializable {
     @FXML
     private Label btn_meus_cursos;
 
+    @FXML
+    private GridPane catalogo_cursos_pnl;
 
     @FXML
     private AnchorPane curso_pnl;
@@ -48,13 +56,13 @@ public class PrincipalController implements Initializable {
     private AnchorPane principal_pnl;
 
     @FXML
+    private AnchorPane painel_curso_pnl;
+
+    @FXML
     private TableView<Curso> tbl_cursos;
 
     @FXML
     private TableColumn<Curso, LocalDate> data_tbl_curso;
-
-    @FXML
-    private TableColumn<Curso, byte[]> img_tbl_curso;
 
     @FXML
     private TableColumn<Curso, String> titulo_tbl_curso;
@@ -71,6 +79,21 @@ public class PrincipalController implements Initializable {
     @FXML
     private Label xp_usr;
 
+    @FXML
+    private Button btn_cancelar_matricula;
+
+    @FXML
+    private Button btn_matricular;
+
+    @FXML
+    private Button btn_add_post;
+
+    @FXML
+    private Button btn_del_curso;
+
+    @FXML
+    private Button btn_mod_curso;
+
 
     @FXML
     private void onBtnCadCursoClicked() throws IOException {
@@ -82,7 +105,7 @@ public class PrincipalController implements Initializable {
     private void onTblCursosClicked(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2){
             Curso c = tbl_cursos.getSelectionModel().getSelectedItem();
-            Application.invocaCurso("Curso.fxml", c.getTitulo(), c);
+            invocaCurso("Curso.fxml", c.getTitulo(), c);
         }
 
     }
@@ -92,37 +115,28 @@ public class PrincipalController implements Initializable {
         if (Application.usuarioLogado.isEh_instrutor()){
             curso_pnl.setVisible(true);
             principal_pnl.setVisible(false);
+            painel_curso_pnl.setVisible(false);
         }
 
     }
 
     @FXML
     private void popularCursos() throws IOException {
-        img_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("img"));
+        TableColumn<Curso, Integer> qtdalunos_tbl_curso = new TableColumn<>("Qtd. Alunos");
 
-        img_tbl_curso.setCellFactory(column -> new TableCell<Curso, byte[]>() {
-            private final ImageView imageView = new ImageView();
-
-            @Override
-            protected void updateItem(byte[] item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setGraphic(null);
-                } else {
-                    Image img = Imagem.bytesToImg(item);
-                    imageView.setImage(img);
-                    imageView.setFitHeight(150);
-                    imageView.setFitWidth(100);
-                    setGraphic(imageView);
-                }
-            }
-        });
-
-        img_tbl_curso.setPrefWidth(100);
         titulo_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         data_tbl_curso.setCellValueFactory(new PropertyValueFactory<>("data_curso"));
 
-        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().pesquisarPorID(Application.usuarioLogado.getId()));
+
+
+        qtdalunos_tbl_curso.setCellValueFactory(cellData -> {
+            Curso curso = cellData.getValue(); // Obter o curso atual
+            int qtdAlunos = DaoFactory.createCursoDao().quantidadeAlunos(curso.getId()); // Chama a função que retorna a quantidade de alunos
+            return new SimpleIntegerProperty(qtdAlunos).asObject(); // Retorna o valor como uma propriedade observável
+        });
+
+        tbl_cursos.getColumns().addAll(qtdalunos_tbl_curso);
+        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().pesquisarPorInstrutorID(Application.usuarioLogado.getId()));
         tbl_cursos.setItems(cursos);
 
 
@@ -130,16 +144,55 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void catalogoCursos() throws IOException {
-        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().pesquisarPorID(Application.usuarioLogado.getId()));
-        tbl_cursos.setItems(cursos);
+        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().listar());
+        int row = 0;
+        int column = 0;
 
+        catalogo_cursos_pnl.getRowConstraints().clear();
+        catalogo_cursos_pnl.getColumnConstraints().clear();
+
+
+        for (Curso c: cursos){
+            try{
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("CardCurso.fxml"));
+                AnchorPane pane = load.load();
+                CardController cc = load.getController();
+                cc.setCurso(c);
+                if (column==2){
+                    column=0;
+                    row++;
+                }
+
+                pane.setOnMouseClicked(event -> {
+                    try {
+                        invocaCurso("Curso.fxml", c.getTitulo(), c);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                pane.setStyle("-fx-border-color: #000; -fx-border-width: 2px; -fx-border-radius: 5px");
+                pane.setOnMouseEntered(event -> pane.setCursor(Cursor.DEFAULT));
+                catalogo_cursos_pnl.add(pane, column++, row);
+                GridPane.setMargin(pane, new Insets(10));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 
+    @FXML
+    private void onBtnCatalogoClicked(MouseEvent event) {
+        curso_pnl.setVisible(false);
+        painel_curso_pnl.setVisible(true);
+        principal_pnl.setVisible(false);
+    }
 
     @FXML
     private void onClickedGoBack(MouseEvent mouseEvent) throws IOException {
         curso_pnl.setVisible(false);
+        painel_curso_pnl.setVisible(false);
         principal_pnl.setVisible(true);
     }
     @FXML
@@ -152,6 +205,7 @@ public class PrincipalController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         try {
             WritableImage i = Imagem.bytesToImg(Application.usuarioLogado.getImg());
             if (i != null) {
@@ -169,6 +223,8 @@ public class PrincipalController implements Initializable {
             btn_cad_curso.setVisible(Application.usuarioLogado.isEh_instrutor());
 
             popularCursos();
+            catalogoCursos();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

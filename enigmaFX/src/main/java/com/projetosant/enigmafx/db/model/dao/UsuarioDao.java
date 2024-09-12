@@ -9,4 +9,5 @@ public interface UsuarioDao {
     void deletarPorID(int id);
     Usuario pesquisarPorID(int ID);
     List<Usuario> listar();
+    List<Integer> getInscricoes(int ID);
 }

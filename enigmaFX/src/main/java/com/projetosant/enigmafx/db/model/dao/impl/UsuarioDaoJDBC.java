@@ -10,7 +10,9 @@ import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UsuarioDaoJDBC implements UsuarioDao {
 
@@ -87,6 +89,30 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }
     }
 
+    public List<Integer> getInscricoes(int id) {
+        List<Integer> lista_inscricoes = new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String in = "select id_curso from curso_aluno where id_aluno = ?";
+        try {
+            pst = conn.prepareStatement(in);
+            pst.setInt(1, id);
+            rs = pst.executeQuery();
+
+            while(rs.next()){
+                lista_inscricoes.add(rs.getInt("id_curso"));
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            DB.closeStatement(pst);
+            DB.closeResultSet(rs);
+        }
+        return lista_inscricoes;
+
+    }
     @Override
     public void atualizar(Usuario u, int ID) {
         PreparedStatement pst = null;
@@ -137,7 +163,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
                 return new Usuario(rs.getString("nome"), rs.getInt("xp"),
                         rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"),
                         rs.getString("login"), rs.getString("senha"),
-                        rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"));
+                        rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"), getInscricoes(rs.getInt("id")));
             }
 
 
@@ -165,7 +191,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
                 Usuario usu = new Usuario(rs.getString("nome"), rs.getInt("xp"),
                         rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"),
                         rs.getString("login"), rs.getString("senha"),
-                        rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"));
+                        rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"), getInscricoes(rs.getInt("id")));
                 l.add(usu);
             }
 

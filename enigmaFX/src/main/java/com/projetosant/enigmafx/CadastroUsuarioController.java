@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static com.projetosant.enigmafx.utils.Imagem.imgToBytes;
@@ -58,7 +59,7 @@ public class CadastroUsuarioController implements Initializable {
     @FXML
     protected void onClickedCadastrar() throws IOException{
         if (valida()) {
-           if(!DaoFactory.createUsuarioDao().inserir(new Usuario(nome_usr.getText(), dt_usr.getValue(), login_usr.getText(), pwd_usr.getText(), Imagem.imgToBytes(fileImg), ehInstrutor))){
+           if(!DaoFactory.createUsuarioDao().inserir(new Usuario(nome_usr.getText(), dt_usr.getValue(), login_usr.getText(), pwd_usr.getText(), Imagem.imgToBytes(fileImg), ehInstrutor, new ArrayList<>() ))){
                nome_usr.setText(null);
                pwd_usr.setText(null);
                dt_usr.setValue(null);

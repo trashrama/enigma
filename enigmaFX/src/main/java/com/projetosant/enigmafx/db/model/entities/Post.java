@@ -11,6 +11,7 @@ public class Post {
     private byte[] aula = null;
     private int id_curso;
     private boolean eh_aula;
+    private LocalDate data_post = LocalDate.now();
 
     public Post(int id, String titulo, String conteudo, byte[] aula, int id_curso, boolean eh_aula) {
         this.id = id;
@@ -21,8 +22,6 @@ public class Post {
         this.eh_aula = eh_aula;
     }
 
-
-    
     @Override
     public int hashCode() {
         return Objects.hash(id, titulo, conteudo, Arrays.hashCode(aula), id_curso, eh_aula);

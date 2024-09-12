@@ -4,6 +4,7 @@ import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.CursoDao;
 import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.db.model.entities.Post;
+import com.projetosant.enigmafx.db.model.entities.Usuario;
 import com.projetosant.enigmafx.utils.Conversao;
 
 import java.sql.*;
@@ -202,6 +203,68 @@ public class CursoDaoJDBC implements CursoDao {
 
         deletarCategorias(id);
 
+    }
+
+    public int quantidadeAlunos(int ID) {
+
+        int qtd = 0;
+
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String in = "SELECT COUNT(id_aluno) from curso_aluno where id_curso = ?";
+        try{
+            pst = conn.prepareStatement(in);
+            pst.setInt(1, ID);
+            rs = pst.executeQuery();
+
+            if(rs.next()){
+                qtd = rs.getInt(1);
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            DB.closeStatement(pst);
+            DB.closeResultSet(rs);
+        }
+        return qtd;
+    }
+
+    @Override
+    public boolean matriculaUsuario(Curso c, Usuario u) {
+        PreparedStatement pst = null;
+        String inUsuario = "INSERT INTO curso_aluno(id_aluno, id_curso) VALUES (?,?)";
+
+        try{
+            pst = conn.prepareStatement(inUsuario);
+            pst.setInt(1, u.getId());
+            pst.setInt(2, c.getId());
+            return pst.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            DB.closeStatement(pst);
+        }
+    }
+
+    public boolean desmatriculaUsuario(Curso c, Usuario u) {
+        PreparedStatement pst = null;
+        String delUsuario = "DELETE from curso_aluno where id_aluno = ? AND id_curso = ?";
+
+        try{
+            pst = conn.prepareStatement(delUsuario);
+            pst.setInt(1, u.getId());
+            pst.setInt(2, c.getId());
+
+            return pst.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            DB.closeStatement(pst);
+        }
     }
 
     @Override

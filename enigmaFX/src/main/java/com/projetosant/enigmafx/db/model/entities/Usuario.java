@@ -2,6 +2,8 @@ package com.projetosant.enigmafx.db.model.entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import com.projetosant.enigmafx.utils.Conversao;
 
@@ -15,6 +17,7 @@ public class Usuario {
     private String login;
     private String senha;
     private byte[] img = null;
+    private List<Integer> cursos_inscritos = new ArrayList<>();
 
     public Usuario(){}
     public Usuario(String nome, LocalDate data_nasc, String login, String senha) {
@@ -42,16 +45,17 @@ public class Usuario {
 
 
 
-    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img, boolean ehInstrutor) {
+    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img, boolean ehInstrutor, List<Integer> cursos_inscritos) {
         this.nome = nome;
         this.data_nasc = data_nasc;
         this.login = login;
         this.senha = senha;
         this.img = img;
         this.eh_instrutor = ehInstrutor;
+        this.cursos_inscritos = cursos_inscritos;
     }
 
-    public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id, byte[] img) {
+    public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id, byte[] img, List<Integer> cursos_inscritos) {
         this.nome = nome;
         this.xp = xp;
         this.data_nasc = data_nasc;
@@ -61,6 +65,7 @@ public class Usuario {
         this.lvl_usuario = lvl_usuario;
         this.id = id;
         this.img = img;
+        this.cursos_inscritos = cursos_inscritos;
 
     }
 
@@ -147,4 +152,14 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public List<Integer> getCursos_inscritos() {
+        return cursos_inscritos;
+    }
+
+    public void setCursos_inscritos(List<Integer> cursos_inscritos) {
+        this.cursos_inscritos = cursos_inscritos;
+    }
+
+
 }

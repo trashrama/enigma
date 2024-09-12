@@ -4,21 +4,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CursoController">
    <children>
       <ImageView fx:id="curso_img" fitHeight="250.0" fitWidth="200.0" layoutX="34.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="curso_titulo" layoutX="254.0" layoutY="56.0" text="Label">
+      <Label fx:id="curso_titulo" layoutX="254.0" layoutY="56.0" text="Label" AnchorPane.bottomAnchor="304.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
          <font>
             <Font name="DejaVu Sans Mono Bold" size="32.0" />
          </font>
       </Label>
       <Label fx:id="curso_categorias" layoutX="254.0" layoutY="106.0" text="Label" />
-      <Label fx:id="curso_desc" layoutX="254.0" layoutY="148.0" prefHeight="127.0" prefWidth="345.0" text="Label" />
       <Label fx:id="curso_data" layoutX="254.0" layoutY="132.0" text="Label" />
       <Button fx:id="btn_mod_curso" layoutX="555.0" layoutY="300.0" mnemonicParsing="false" text="Modificar" />
       <Button fx:id="btn_del_curso" layoutX="649.0" layoutY="300.0" mnemonicParsing="false" text="Deletar" />
       <Button fx:id="btn_add_post" layoutX="678.0" layoutY="26.0" mnemonicParsing="false" text="Add Post" />
+      <Button fx:id="btn_cancelar_matricula" disable="true" layoutX="563.0" layoutY="324.0" mnemonicParsing="false" onAction="#cancelarMatricula" text="Cancelar Matricula" visible="false" />
+      <Button fx:id="btn_matricular" layoutX="451.0" layoutY="324.0" mnemonicParsing="false" onAction="#fazerMatricula" text="Matricular-se" visible="false" />
+      <VBox layoutX="254.0" layoutY="158.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="295.0" maxHeight="150.0" maxWidth="295.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="158.0">
+         <children>
+            <Text fx:id="curso_desc" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="295.0" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
