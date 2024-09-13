@@ -212,8 +212,14 @@ public class PrincipalController implements Initializable {
     @FXML
     public void feed() throws IOException {
         feed.getItems().clear();
-        ObservableList<Post> posts = FXCollections.observableArrayList(DaoFactory.createPostDao().listarPostsCursosdoUsuario(usuarioLogado));
+        ObservableList<Post> posts = FXCollections.observableArrayList();
 
+        if (usuarioLogado.isEh_instrutor()){
+            posts = FXCollections.observableArrayList(DaoFactory.createPostDao().listarPostsCursosdoUsuario(usuarioLogado));
+
+        }else {
+            posts = FXCollections.observableArrayList(DaoFactory.createPostDao().listarPostsCursosdoInstrutor(usuarioLogado));
+        }
         for (Post p : posts) {
             try {
                 FXMLLoader load = new FXMLLoader();

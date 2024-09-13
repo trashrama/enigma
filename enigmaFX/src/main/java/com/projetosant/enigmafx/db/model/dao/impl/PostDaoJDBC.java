@@ -157,6 +157,32 @@ public class PostDaoJDBC implements PostDao {
 
     @Override
     public List<Post> listarPostsCursosdoInstrutor(Usuario u) {
-        return List.of();
+        List<Post> lp = new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        int adicionado = 0;
+
+        String in = "SELECT * from post p inner join curso c on p.id_curso = c.id where c.id_instrutor = ? order by data_post";
+        try{
+            pst = conn.prepareStatement(in);
+            pst.setInt(1, u.getId());
+            rs = pst.executeQuery();
+
+            while(rs.next()){
+                lp.add(new Post(rs.getInt("id"), rs.getString("titulo"), rs.getString("conteudo"), rs.getBytes("aula"),
+                        rs.getInt("id_curso"), rs.getBoolean("eh_aula"), rs.getDate("data_post").toLocalDate()));
+            }
+
+
+            return lp;
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            DB.closeStatement(pst);
+            DB.closeResultSet(rs);
+        }
     }
 }
