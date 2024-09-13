@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -18,12 +19,10 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.PrincipalController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.PrincipalController">
    <children>
       <AnchorPane fx:id="nome_usr" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #0F319E;" AnchorPane.topAnchor="0.0">
          <children>
-            <Circle fx:id="usr_img" fill="DODGERBLUE" layoutX="100.0" layoutY="94.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="251.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="39.0" />
-            <Label fx:id="usr_nome" layoutX="79.0" layoutY="159.0" text="Label" textFill="WHITE" />
             <ProgressBar layoutX="35.0" layoutY="247.0" prefHeight="20.0" prefWidth="139.0" progress="0.0" />
             <Label fx:id="usr_lvl" layoutX="32.0" layoutY="217.0" text="Label" textFill="WHITE">
                <font>
@@ -36,21 +35,40 @@
                </font>
             </Label>
             <Button fx:id="btn_sair" layoutX="83.0" layoutY="343.0" mnemonicParsing="false" onAction="#onBtnSairClicked" text="Sair" />
+            <GridPane alignment="BOTTOM_CENTER" layoutX="28.0" layoutY="16.0" prefHeight="179.0" prefWidth="113.0" AnchorPane.bottomAnchor="205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="24.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Circle fx:id="usr_img" fill="DODGERBLUE" radius="55.0" stroke="BLACK" strokeType="INSIDE" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label fx:id="usr_nome" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="40.0" right="40.0" />
+                     </padding></Label>
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
       <StackPane layoutX="200.0" prefHeight="400.0" prefWidth="600.0">
          <children>
             <AnchorPane fx:id="principal_pnl" prefHeight="400.0" prefWidth="600.0">
                <children>
-                  <GridPane fx:id="menu_pnl" alignment="CENTER" layoutX="207.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="38.0" prefWidth="385.0">
+                  <GridPane fx:id="menu_pnl" alignment="CENTER" layoutX="147.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="416.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="179.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="179.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="206.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="189.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="144.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="97.0" />
                     </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                     </rowConstraints>
                   </GridPane>
                   <AnchorPane layoutX="-2.0" layoutY="54.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                      <children>
@@ -78,6 +96,14 @@
                      </cursor>
                   </Label>
                   <Label fx:id="btn_catalogo" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnCatalogoClicked" prefHeight="34.0" prefWidth="220.0" text="Catálogo" textAlignment="CENTER" textFill="#0b18c9b8" visible="false">
+                     <font>
+                        <Font name="Liberation Sans Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="btn_meu_perfil" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#onBtnMeuPerfil" prefHeight="41.0" prefWidth="273.0" text="Perfil" textAlignment="CENTER" textFill="#0b18c9b8" visible="false">
                      <font>
                         <Font name="Liberation Sans Bold" size="15.0" />
                      </font>

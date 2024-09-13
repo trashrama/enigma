@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -20,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
@@ -103,6 +106,9 @@ public class PrincipalController implements Initializable {
     private Button btn_add_post;
 
     @FXML
+    private Label btn_meu_perfil;
+
+    @FXML
     private Button btn_del_curso;
 
     @FXML
@@ -110,6 +116,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private ListView<AnchorPane> feed;
+
 
     @FXML
     private void onBtnCadCursoClicked() throws IOException {
@@ -200,6 +207,8 @@ public class PrincipalController implements Initializable {
         }
 
     }
+
+
     @FXML
     public void feed() throws IOException {
 
@@ -230,6 +239,11 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
+    private void onBtnMeuPerfil(MouseEvent event) throws IOException {
+        Application.invocaTela("Usuario.fxml", "Meu perfil");
+    }
+
+    @FXML
     private void onClickedGoBack(MouseEvent mouseEvent) throws IOException {
         curso_pnl.setVisible(false);
         painel_curso_pnl.setVisible(false);
@@ -244,19 +258,23 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void setMenu(){
-        if (usuarioLogado.isEh_instrutor()){
-            btn_meus_cursos.setVisible(true);
-            btn_cad_curso.setVisible(true);
 
-            menu_pnl.add(btn_meus_cursos,0,0);
+        menu_pnl.add(btn_meus_cursos,0,0);
+        menu_pnl.add(btn_meu_perfil,2,0);
+
+        btn_meu_perfil.setVisible(true);
+        btn_meus_cursos.setVisible(true);
+
+
+        if (usuarioLogado.isEh_instrutor()){
+            btn_cad_curso.setVisible(true);
             menu_pnl.add(btn_cad_curso,1,0);
 
         }else{
-            menu_pnl.add(btn_catalogo,0,0);
-            menu_pnl.add(btn_meus_cursos,1,0);
-
-            btn_meus_cursos.setVisible(true);
             btn_catalogo.setVisible(true);
+            menu_pnl.add(btn_catalogo,1,0);
+
+
 
         }
 
@@ -277,7 +295,6 @@ public class PrincipalController implements Initializable {
             if (i != null) {
                 usr_img.setFill(new ImagePattern(i));
             } else{
-                System.out.println("oi");
                 //diretorio padrao da imagem padrao
                 //usr_img.setFill(new ImagePattern());
             }
