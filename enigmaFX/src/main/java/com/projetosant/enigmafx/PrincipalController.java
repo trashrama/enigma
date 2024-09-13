@@ -38,8 +38,21 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static com.projetosant.enigmafx.Application.invocaCurso;
+import static com.projetosant.enigmafx.Application.usuarioLogado;
 
 public class PrincipalController implements Initializable {
+
+
+
+    @FXML
+    private static PrincipalController instance;
+
+    @FXML
+    private GridPane menu_pnl;
+
+
+    @FXML
+    private Label btn_catalogo;
 
     @FXML
     private Label btn_cad_curso;
@@ -96,7 +109,7 @@ public class PrincipalController implements Initializable {
     private Button btn_mod_curso;
 
     @FXML
-    private ListView<Post> feed;
+    private ListView<AnchorPane> feed;
 
     @FXML
     private void onBtnCadCursoClicked() throws IOException {
@@ -115,11 +128,9 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void onBtnMeusCursosClicked() throws IOException {
-        if (Application.usuarioLogado.isEh_instrutor()){
             curso_pnl.setVisible(true);
             principal_pnl.setVisible(false);
             painel_curso_pnl.setVisible(false);
-        }
 
     }
 
@@ -138,8 +149,13 @@ public class PrincipalController implements Initializable {
             return new SimpleIntegerProperty(qtdAlunos).asObject(); // Retorna o valor como uma propriedade observável
         });
 
-        tbl_cursos.getColumns().addAll(qtdalunos_tbl_curso);
-        ObservableList<Curso> cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().pesquisarPorInstrutorID(Application.usuarioLogado.getId()));
+        tbl_cursos.getColumns().add(qtdalunos_tbl_curso);
+        ObservableList<Curso> cursos;
+        if (usuarioLogado.isEh_instrutor()){
+            cursos = FXCollections.observableArrayList(DaoFactory.createCursoDao().pesquisarPorInstrutorID(Application.usuarioLogado.getId()));
+        }else{
+            cursos = FXCollections.observableArrayList(DaoFactory.createUsuarioDao().getInscricoes(usuarioLogado.getId()));
+        }
         tbl_cursos.setItems(cursos);
 
 
@@ -184,6 +200,27 @@ public class PrincipalController implements Initializable {
         }
 
     }
+    @FXML
+    public void feed() throws IOException {
+
+        feed.getItems().clear();
+        ObservableList<Post> posts = FXCollections.observableArrayList(DaoFactory.createPostDao().listarPostsCursosdoUsuario(usuarioLogado));
+        System.out.println(posts);
+
+        for (Post p : posts) {
+            try {
+                FXMLLoader load = new FXMLLoader();
+                load.setLocation(getClass().getResource("CardPost.fxml"));
+                AnchorPane pane = load.load();
+                CardPostController cpc = load.getController();
+                cpc.setCurso(p);
+
+                feed.getItems().add(pane);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     @FXML
     private void onBtnCatalogoClicked(MouseEvent event) {
@@ -205,9 +242,35 @@ public class PrincipalController implements Initializable {
     }
 
 
+    @FXML
+    private void setMenu(){
+        if (usuarioLogado.isEh_instrutor()){
+            btn_meus_cursos.setVisible(true);
+            btn_cad_curso.setVisible(true);
 
+            menu_pnl.add(btn_meus_cursos,0,0);
+            menu_pnl.add(btn_cad_curso,1,0);
+
+        }else{
+            menu_pnl.add(btn_catalogo,0,0);
+            menu_pnl.add(btn_meus_cursos,1,0);
+
+            btn_meus_cursos.setVisible(true);
+            btn_catalogo.setVisible(true);
+
+        }
+
+
+    }
+
+    public static void updateFeed() throws IOException {
+        if (instance != null) {
+            instance.feed();
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        instance = this;
 
         try {
             WritableImage i = Imagem.bytesToImg(Application.usuarioLogado.getImg());
@@ -224,12 +287,15 @@ public class PrincipalController implements Initializable {
             usr_lvl.setText("LVL: " + Application.usuarioLogado.getLvl_usuario());
             xp_usr.setText("XP: " + Application.usuarioLogado.getXp());
             btn_cad_curso.setVisible(Application.usuarioLogado.isEh_instrutor());
-
+            setMenu();
             popularCursos();
             catalogoCursos();
+            feed();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }

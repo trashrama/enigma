@@ -17,7 +17,7 @@ public class Usuario {
     private String login;
     private String senha;
     private byte[] img = null;
-    private List<Integer> cursos_inscritos = new ArrayList<>();
+    private List<Curso> cursos_inscritos = new ArrayList<>();
 
     public Usuario(){}
     public Usuario(String nome, LocalDate data_nasc, String login, String senha) {
@@ -45,17 +45,16 @@ public class Usuario {
 
 
 
-    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img, boolean ehInstrutor, List<Integer> cursos_inscritos) {
+    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img, boolean ehInstrutor, List<Curso> cursos_inscritos) {
         this.nome = nome;
         this.data_nasc = data_nasc;
         this.login = login;
         this.senha = senha;
         this.img = img;
         this.eh_instrutor = ehInstrutor;
-        this.cursos_inscritos = cursos_inscritos;
     }
 
-    public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id, byte[] img, List<Integer> cursos_inscritos) {
+    public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id, byte[] img, List<Curso> cursos_inscritos) {
         this.nome = nome;
         this.xp = xp;
         this.data_nasc = data_nasc;
@@ -153,11 +152,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public List<Integer> getCursos_inscritos() {
+    public List<Curso> getCursos_inscritos() {
         return cursos_inscritos;
     }
 
-    public void setCursos_inscritos(List<Integer> cursos_inscritos) {
+    public void setCursos_inscritos(List<Curso> cursos_inscritos) {
         this.cursos_inscritos = cursos_inscritos;
     }
 

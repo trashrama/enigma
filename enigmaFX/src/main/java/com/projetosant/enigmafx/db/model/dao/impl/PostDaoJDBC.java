@@ -140,7 +140,7 @@ public class PostDaoJDBC implements PostDao {
 
             while(rs.next()){
                 lp.add(new Post(rs.getInt("id"), rs.getString("titulo"), rs.getString("conteudo"), rs.getBytes("aula"),
-                        rs.getInt("id_curso"), rs.getBoolean("eh_aula"), rs.getDate("data_curso").toLocalDate()));
+                        rs.getInt("id_curso"), rs.getBoolean("eh_aula"), rs.getDate("data_post").toLocalDate()));
             }
 
 

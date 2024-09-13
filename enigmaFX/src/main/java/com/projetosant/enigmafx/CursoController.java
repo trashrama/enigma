@@ -5,21 +5,28 @@ import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.utils.Imagem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
 
+import java.io.IOException;
 import java.net.URL;
+import java.security.Principal;
 import java.util.ResourceBundle;
 
 public class CursoController implements Initializable {
 
     private Curso curso;
+
 
     @FXML
     private Label curso_categorias;
@@ -80,7 +87,7 @@ public class CursoController implements Initializable {
                 btn_matricular.setVisible(true);
 
                 System.out.println(DaoFactory.createUsuarioDao().getInscricoes(Application.usuarioLogado.getId()));
-                if (DaoFactory.createUsuarioDao().getInscricoes(Application.usuarioLogado.getId()).contains(curso.getId())){
+                if (DaoFactory.createUsuarioDao().getInscricoes(Application.usuarioLogado.getId()).contains(curso)){
                     btn_cancelar_matricula.setDisable(false);
                     btn_matricular.setDisable(true);
                 }else{
@@ -95,18 +102,29 @@ public class CursoController implements Initializable {
     }
 
     @FXML
-    void cancelarMatricula(ActionEvent event) {
+    void cancelarMatricula(ActionEvent event) throws IOException {
         DaoFactory.createCursoDao().desmatriculaUsuario(curso, Application.usuarioLogado);
         btn_matricular.setDisable(false);
         btn_cancelar_matricula.setDisable(true);
 
+        PrincipalController.updateFeed();
+
+
+
     }
 
     @FXML
-    void fazerMatricula(ActionEvent event) {
+    void fazerMatricula(ActionEvent event) throws IOException {
         DaoFactory.createCursoDao().matriculaUsuario(curso, Application.usuarioLogado);
         btn_matricular.setDisable(true);
         btn_cancelar_matricula.setDisable(false);
+
+
+        PrincipalController.updateFeed();
+
+
+
+
 
     }
 

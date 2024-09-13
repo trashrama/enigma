@@ -90,6 +90,7 @@ public class CadastrarCursoController implements Initializable {
     public void criarCurso() throws IOException {
         if (validacao()){
             DaoFactory.createCursoDao().inserir(new Curso(curso_title.getText(),curso_desc.getText(), imgToBytes(), categoriasSelecionadas()));
+            Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "", "Curso criado com sucesso!");
         }
     }
 

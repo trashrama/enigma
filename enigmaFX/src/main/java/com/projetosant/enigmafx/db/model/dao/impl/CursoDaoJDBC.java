@@ -158,7 +158,7 @@ public class CursoDaoJDBC implements CursoDao {
 
     }
 
-    private Map<Integer, String> lerCategorias(int id) {
+    public Map<Integer, String> lerCategorias(int id) {
         PreparedStatement pst = null;
         ResultSet rs = null;
         Map<Integer, String> categorias = new HashMap<Integer, String>();

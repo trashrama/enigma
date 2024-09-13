@@ -2,6 +2,7 @@ package com.projetosant.enigmafx.db.model.dao.impl;
 
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
+import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.utils.Alerta;
 import com.projetosant.enigmafx.utils.Conversao;
 import com.projetosant.enigmafx.db.model.dao.UsuarioDao;
@@ -89,18 +90,19 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }
     }
 
-    public List<Integer> getInscricoes(int id) {
-        List<Integer> lista_inscricoes = new ArrayList<>();
+    public List<Curso> getInscricoes(int idUsu) {
+        List<Curso> lista_inscricoes = new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
-        String in = "select id_curso from curso_aluno where id_aluno = ?";
+        String in = "select * from curso inner join curso_aluno on curso.id = curso_aluno.id_curso where id_aluno = ?";
         try {
             pst = conn.prepareStatement(in);
-            pst.setInt(1, id);
+            pst.setInt(1, idUsu);
             rs = pst.executeQuery();
 
             while(rs.next()){
-                lista_inscricoes.add(rs.getInt("id_curso"));
+                lista_inscricoes.add(new Curso(rs.getInt("id"), rs.getString("titulo"),
+                        rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), DaoFactory.createCursoDao().lerCategorias(rs.getInt("id"))));
             }
 
 

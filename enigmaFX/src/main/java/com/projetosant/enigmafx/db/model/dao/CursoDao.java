@@ -5,6 +5,7 @@ import com.projetosant.enigmafx.db.model.entities.Post;
 import com.projetosant.enigmafx.db.model.entities.Usuario;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CursoDao {
     void inserir(Curso c);
@@ -16,5 +17,5 @@ public interface CursoDao {
     int quantidadeAlunos(int ID);
     boolean matriculaUsuario(Curso c, Usuario u);
     boolean desmatriculaUsuario(Curso c, Usuario u);
-
+    Map<Integer, String> lerCategorias(int id);
 }

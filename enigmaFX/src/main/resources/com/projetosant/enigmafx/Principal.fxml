@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.PrincipalController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.PrincipalController">
    <children>
       <AnchorPane fx:id="nome_usr" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #0F319E;" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,7 +42,7 @@
          <children>
             <AnchorPane fx:id="principal_pnl" prefHeight="400.0" prefWidth="600.0">
                <children>
-                  <GridPane alignment="CENTER" layoutX="207.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="385.0">
+                  <GridPane fx:id="menu_pnl" alignment="CENTER" layoutX="207.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="38.0" prefWidth="385.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="179.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="179.0" />
@@ -51,32 +51,6 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                     <children>
-                        <Label fx:id="btn_meus_cursos" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnMeusCursosClicked" prefHeight="41.0" prefWidth="273.0" text="Meus Cursos" textAlignment="CENTER" textFill="#0b18c9b8" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Liberation Sans Bold" size="15.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                        <Label fx:id="btn_cad_curso" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnCadCursoClicked" prefHeight="34.0" prefWidth="220.0" text="Cadastrar Curso" textAlignment="CENTER" textFill="#0b18c9b8" GridPane.columnIndex="2">
-                           <font>
-                              <Font name="Liberation Sans Bold" size="15.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                        <Label fx:id="btn_catalogo" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnCatalogoClicked" prefHeight="34.0" prefWidth="220.0" text="Catálogo" textAlignment="CENTER" textFill="#0b18c9b8">
-                           <font>
-                              <Font name="Liberation Sans Bold" size="15.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
                   </GridPane>
                   <AnchorPane layoutX="-2.0" layoutY="54.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                      <children>
@@ -87,6 +61,30 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
+                  <Label fx:id="btn_meus_cursos" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnMeusCursosClicked" prefHeight="41.0" prefWidth="273.0" text="Meus Cursos" textAlignment="CENTER" textFill="#0b18c9b8" visible="false">
+                     <font>
+                        <Font name="Liberation Sans Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="btn_cad_curso" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnCadCursoClicked" prefHeight="34.0" prefWidth="220.0" text="Cadastrar Curso" textAlignment="CENTER" textFill="#0b18c9b8" visible="false">
+                     <font>
+                        <Font name="Liberation Sans Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Label fx:id="btn_catalogo" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onBtnCatalogoClicked" prefHeight="34.0" prefWidth="220.0" text="Catálogo" textAlignment="CENTER" textFill="#0b18c9b8" visible="false">
+                     <font>
+                        <Font name="Liberation Sans Bold" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="curso_pnl" prefHeight="200.0" prefWidth="200.0" visible="false">

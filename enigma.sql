@@ -174,7 +174,17 @@ INSERT INTO post (titulo, conteudo, id_curso, data_post)
 VALUES
     ('Introdução ao SQL', 'Neste post, abordaremos o básico sobre SQL, incluindo criação de tabelas, inserção de dados, e consultas básicas.', 1, '2024-09-10 10:00:00');
 
+
+
+INSERT INTO post (titulo, conteudo, id_curso, data_post)
+VALUES
+    ('Introdução ao SQL', 'Neste post, abordaremos o básico sobre SQL, incluindo criação de tabelas, inserção de dados, e consultas básicas.', 1, '2024-09-10 10:00:00');
+
+
 -- selecionar posts pro feed
 SELECT * from post p inner join curso_aluno ca on p.id_curso = ca.id_curso where ca.id_aluno = 1 order by data_nasc;
+
+
+select * from curso inner join curso.id = curso_aluno.id where id_aluno = 2
 
 drop database enigma;
