@@ -66,11 +66,10 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
 
     @Override
-    public void deletarPorID(int id) {
+    public boolean deletarPorID(int id) {
         PreparedStatement pst = null;
         int deletado = 0;
         String in = "DELETE FROM usuario where id = ?";
-
 
 
         try {
@@ -79,15 +78,14 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             deletado = pst.executeUpdate();
 
             if (deletado > 0){
-                System.out.println("DELETADO COM SUCESSO!");
-            }else{
-                System.out.println("NÃO HÁ USUÁRIOS PARA SEREM DELETADOS");
+                return true;
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }finally{
             DB.closeStatement(pst);
         }
+        return false;
     }
 
     public List<Curso> getInscricoes(int idUsu) {
@@ -116,7 +114,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
     }
     @Override
-    public void atualizar(Usuario u, int ID) {
+    public boolean atualizar(Usuario u, int ID) {
         PreparedStatement pst = null;
         String in = "UPDATE usuario SET nome = ?, data_nasc = ?, eh_instrutor = ?, login = ?, senha = ?, img = ? WHERE id = ?";
         int atualizado = 0;
@@ -136,9 +134,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
 
 
             if (atualizado > 0){
-                System.out.println("ATUALIZADO COM SUCESSO!");
-            }else{
-                System.out.println("ID NÃO FOI ENCONTRADO NO BANCO DE DADOS");
+                return true;
             }
 
 
@@ -148,6 +144,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }finally {
             DB.closeStatement(pst);
         }
+        return false;
     }
 
 

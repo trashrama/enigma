@@ -154,4 +154,9 @@ public class PostDaoJDBC implements PostDao {
             DB.closeResultSet(rs);
         }
     }
+
+    @Override
+    public List<Post> listarPostsCursosdoInstrutor(Usuario u) {
+        return List.of();
+    }
 }

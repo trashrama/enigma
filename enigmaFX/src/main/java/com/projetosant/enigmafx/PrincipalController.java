@@ -211,10 +211,8 @@ public class PrincipalController implements Initializable {
 
     @FXML
     public void feed() throws IOException {
-
         feed.getItems().clear();
         ObservableList<Post> posts = FXCollections.observableArrayList(DaoFactory.createPostDao().listarPostsCursosdoUsuario(usuarioLogado));
-        System.out.println(posts);
 
         for (Post p : posts) {
             try {

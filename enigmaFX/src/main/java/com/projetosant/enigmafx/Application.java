@@ -42,6 +42,7 @@ public class Application extends javafx.application.Application {
     }
 
     public static void geraTelas(String url, String titulo) throws IOException {
+        System.out.println("trocou");
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(url));
         Scene scene = new Scene(fxmlLoader.load());
         stagePrincipal.setTitle("ENIGMA - "+titulo);
@@ -51,6 +52,16 @@ public class Application extends javafx.application.Application {
         stagePrincipal.show();
     }
 
+    public static void invocaTela(String url, String titulo) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(url));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        stage.setTitle("ENIGMA - "+titulo);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
     public static void invocaCurso(String url, String titulo, Curso c) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(url));

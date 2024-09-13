@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface UsuarioDao {
     boolean inserir(Usuario u);
-    void atualizar(Usuario u, int ID);
-    void deletarPorID(int id);
+    boolean atualizar(Usuario u, int ID);
+    boolean deletarPorID(int id);
     Usuario pesquisarPorID(int ID);
     List<Usuario> listar();
     List<Curso> getInscricoes(int ID);

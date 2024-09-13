@@ -24,7 +24,6 @@ public class CursoDaoJDBC implements CursoDao {
     public void inserir(Curso c) {
 
         PreparedStatement pst1 = null;
-        PreparedStatement pst2 = null;
 
         ResultSet rs = null;
         int adicionado = 0;
@@ -65,7 +64,6 @@ public class CursoDaoJDBC implements CursoDao {
             throw new RuntimeException(e);
         }finally{
             DB.closeStatement(pst1);
-            DB.closeStatement(pst2);
         }
     }
 

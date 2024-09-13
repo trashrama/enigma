@@ -10,5 +10,6 @@ public interface PostDao {
     void deletarPorID(int id);
     boolean atualizar(Post p);
     List<Post> listarPostsCursosdoUsuario(Usuario u);
+    List<Post> listarPostsCursosdoInstrutor(Usuario u);
 
 }

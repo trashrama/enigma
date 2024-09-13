@@ -73,9 +73,14 @@ public class UsuarioController implements Initializable {
 
     @FXML
     private void onAtualizarClicked(ActionEvent event) throws IOException {
+        byte[] img = Imagem.imgToBytes(fileImg);
+        if (img == null){
+            img = usuarioLogado.getImg();
+        }
 
-        if(DaoFactory.createUsuarioDao().atualizar(new Usuario(nome_field.getText(), data_nasc_field.getValue(), login_field.getText(), senha_field.getText(), Imagem.imgToBytes(fileImg), instrutor_field.isSelected(), usuarioLogado.getId()), usuarioLogado.getId())){
-            usuarioLogado = new Usuario(nome_field.getText(), data_nasc_field.getValue(), login_field.getText(), senha_field.getText(), Imagem.imgToBytes(fileImg), instrutor_field.isSelected(), usuarioLogado.getId());
+        if(DaoFactory.createUsuarioDao().atualizar(new Usuario(nome_field.getText(), data_nasc_field.getValue(), login_field.getText(), senha_field.getText(), img, instrutor_field.isSelected(), usuarioLogado.getId()), usuarioLogado.getId())){
+            usuarioLogado = new Usuario(nome_field.getText(), data_nasc_field.getValue(), login_field.getText(), senha_field.getText(), img, instrutor_field.isSelected(), usuarioLogado.getId());
+            System.out.println(usuarioLogado.isEh_instrutor());
             Application.geraTelas("Principal.fxml", "Principal");
             Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "", "Atualizado com sucesso!");
 

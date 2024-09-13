@@ -1,6 +1,7 @@
 package com.projetosant.enigmafx.utils;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 
 import javax.imageio.ImageIO;
@@ -30,4 +31,6 @@ public class Imagem {
         }
         return null;
     }
+
+
 }

@@ -54,6 +54,17 @@ public class Usuario {
         this.eh_instrutor = ehInstrutor;
     }
 
+    public Usuario(String nome, LocalDate data_nasc, String login, String senha, byte[] img, boolean ehInstrutor, int id) {
+        this.nome = nome;
+        this.data_nasc = data_nasc;
+        this.login = login;
+        this.senha = senha;
+        this.img = img;
+        this.eh_instrutor = ehInstrutor;
+        this.id = id;
+
+    }
+
     public Usuario(String nome, long xp, LocalDate data_nasc, boolean eh_instrutor, String login, String senha, int lvl_usuario, int id, byte[] img, List<Curso> cursos_inscritos) {
         this.nome = nome;
         this.xp = xp;
