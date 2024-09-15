@@ -46,6 +46,15 @@ public class Curso {
         this.data_curso = (data_curso);
         this.categorias = categorias;
     }
+    public Curso(int id, String titulo, int id_instrutor, LocalDate data_curso, Map<Integer, String> categorias, byte[] img, String descricao) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.id_instrutor = id_instrutor;
+        this.data_curso = (data_curso);
+        this.categorias = categorias;
+        this.img = img;
+    }
 
 
     public byte[] getImg() {
@@ -75,13 +84,23 @@ public class Curso {
         this.categorias = categorias;
     }
 
+    public Curso(String titulo, String descricao, byte[] img, Map<Integer, String> categorias, int idInstrutor, LocalDate dt) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.img = img;
+        this.id_instrutor = idInstrutor;
+        this.data_curso = dt;
+        this.categorias = categorias;
+    }
+
+
     public Curso(int ID, String titulo, String descricao, byte[] img, int idInstrutor, LocalDate dt, Map<Integer, String> categorias) {
         this.id = ID;
         this.titulo = titulo;
         this.descricao = descricao;
         this.img = img;
         this.id_instrutor = idInstrutor;
-        this.data_curso = LocalDate.now();
+        this.data_curso = dt;
         this.categorias = categorias;
     }
 

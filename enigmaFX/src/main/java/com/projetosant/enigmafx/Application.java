@@ -2,9 +2,11 @@ package com.projetosant.enigmafx;
 
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.entities.Curso;
+import com.projetosant.enigmafx.db.model.entities.Post;
 import com.projetosant.enigmafx.db.model.entities.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
@@ -42,7 +44,6 @@ public class Application extends javafx.application.Application {
     }
 
     public static void geraTelas(String url, String titulo) throws IOException {
-        System.out.println("trocou");
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(url));
         Scene scene = new Scene(fxmlLoader.load());
         stagePrincipal.setTitle("ENIGMA - "+titulo);
@@ -56,6 +57,22 @@ public class Application extends javafx.application.Application {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(url));
         Scene scene = new Scene(fxmlLoader.load());
+
+        stage.setTitle("ENIGMA - "+titulo);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    public static void invocaPost(String url, String titulo, Post p, int idCurso) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(url));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        PostController pc = fxmlLoader.getController();
+
+        // Passar o parâmetro para o controller
+        pc.setPost(p, idCurso);
 
         stage.setTitle("ENIGMA - "+titulo);
         stage.setScene(scene);

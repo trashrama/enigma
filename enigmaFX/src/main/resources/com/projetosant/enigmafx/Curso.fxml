@@ -1,32 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CursoController">
+<StackPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CursoController">
    <children>
-      <ImageView fx:id="curso_img" fitHeight="250.0" fitWidth="200.0" layoutX="34.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="curso_titulo" layoutX="254.0" layoutY="56.0" text="Label" AnchorPane.bottomAnchor="304.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
-         <font>
-            <Font name="DejaVu Sans Mono Bold" size="32.0" />
-         </font>
-      </Label>
-      <Label fx:id="curso_categorias" layoutX="254.0" layoutY="106.0" text="Label" />
-      <Label fx:id="curso_data" layoutX="254.0" layoutY="132.0" text="Label" />
-      <Button fx:id="btn_mod_curso" layoutX="555.0" layoutY="300.0" mnemonicParsing="false" text="Modificar" />
-      <Button fx:id="btn_del_curso" layoutX="649.0" layoutY="300.0" mnemonicParsing="false" text="Deletar" />
-      <Button fx:id="btn_add_post" layoutX="678.0" layoutY="26.0" mnemonicParsing="false" text="Add Post" />
-      <Button fx:id="btn_cancelar_matricula" disable="true" layoutX="563.0" layoutY="324.0" mnemonicParsing="false" onAction="#cancelarMatricula" text="Cancelar Matricula" visible="false" />
-      <Button fx:id="btn_matricular" layoutX="451.0" layoutY="324.0" mnemonicParsing="false" onAction="#fazerMatricula" text="Matricular-se" visible="false" />
-      <VBox layoutX="254.0" layoutY="158.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="295.0" maxHeight="150.0" maxWidth="295.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="158.0">
+      <AnchorPane fx:id="pnl_curso" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0">
          <children>
-            <Text fx:id="curso_desc" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="295.0" />
+            <ImageView fx:id="curso_img" fitHeight="250.0" fitWidth="200.0" layoutX="34.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="curso_titulo" layoutX="254.0" layoutY="56.0" prefHeight="46.0" prefWidth="546.0" text="Label" AnchorPane.bottomAnchor="448.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="curso_categorias" layoutX="254.0" layoutY="106.0" text="Label" />
+            <Label fx:id="curso_data" layoutX="254.0" layoutY="132.0" text="Label" />
+            <Button fx:id="btn_cancelar_matricula" disable="true" layoutX="563.0" layoutY="324.0" mnemonicParsing="false" onAction="#cancelarMatricula" text="Cancelar Matricula" visible="false" AnchorPane.topAnchor="295.0" />
+            <Button fx:id="btn_matricular" layoutX="451.0" layoutY="324.0" mnemonicParsing="false" onAction="#fazerMatricula" text="Matricular-se" visible="false" AnchorPane.topAnchor="295.0" />
+            <VBox layoutX="254.0" layoutY="158.0" maxHeight="150.0" maxWidth="474.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="127.0" prefWidth="474.0" AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="158.0">
+               <children>
+                  <Text fx:id="curso_desc" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="295.0" />
+               </children>
+            </VBox>
+            <GridPane hgap="10.0" layoutX="254.0" layoutY="14.0" prefHeight="46.0" prefWidth="431.0">
+              <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="btn_add_post" mnemonicParsing="false" onAction="#addPost" prefWidth="120.0" text="Add Post" GridPane.columnIndex="2" />
+                  <Button fx:id="btn_mod_curso" mnemonicParsing="false" onAction="#alterarCurso" prefHeight="22.0" prefWidth="227.0" text="Modificar Curso" GridPane.columnIndex="1" />
+                  <Button fx:id="btn_del_curso" mnemonicParsing="false" onAction="#deletarCurso" prefWidth="164.0" text="Deletar Curso" />
+               </children>
+            </GridPane>
+            <Label fx:id="curso_titulo1" alignment="CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="283.0" prefHeight="46.0" prefWidth="152.0" text="Posts" textAlignment="CENTER" AnchorPane.leftAnchor="324.0" AnchorPane.rightAnchor="324.0">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="21.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="34.0" layoutY="324.0" prefHeight="200.0" prefWidth="688.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="330.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="217.0" prefWidth="800.0">
+                     <children>
+                        <TableView fx:id="tbl_posts" layoutX="33.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="tbl_id" prefWidth="91.0" text="id" />
+                            <TableColumn fx:id="tbl_titulo" prefWidth="368.0" text="titulo" />
+                              <TableColumn fx:id="tbl_data" prefWidth="158.0" text="data" />
+                              <TableColumn fx:id="tbl_aula" prefWidth="152.0" text=" aula" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
-      </VBox>
+      </AnchorPane>
+      <AnchorPane fx:id="pnl_editar" prefHeight="550.0" prefWidth="800.0" visible="false">
+         <children>
+            <ImageView fx:id="imgedt_field" fitHeight="250.0" fitWidth="200.0" layoutX="44.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox layoutX="260.0" layoutY="148.0" maxHeight="150.0" maxWidth="474.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="139.0" prefWidth="474.0">
+               <children>
+                  <TextArea fx:id="descricaoedt_field" prefHeight="200.0" prefWidth="200.0" promptText="Descrição" />
+               </children>
+            </VBox>
+            <GridPane alignment="CENTER_RIGHT" hgap="10.0" layoutX="264.0" layoutY="24.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="46.0" prefWidth="431.0">
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onSalvarCursoClicked" prefWidth="120.0" text="Salvar" GridPane.columnIndex="2" />
+               </children>
+            </GridPane>
+            <Label fx:id="curso_titulo11" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="334.0" layoutY="293.0" prefHeight="46.0" prefWidth="152.0" text="Posts" textAlignment="CENTER">
+               <font>
+                  <Font name="DejaVu Sans Mono Bold" size="21.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutX="44.0" layoutY="334.0" prefHeight="200.0" prefWidth="688.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="217.0" prefWidth="800.0">
+                     <children>
+                        <TableView fx:id="tbl_posts1" disable="true" layoutX="33.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="tbl_id1" prefWidth="91.0" text="id" />
+                              <TableColumn fx:id="tbl_titulo1" prefWidth="368.0" text="titulo" />
+                              <TableColumn fx:id="tbl_data1" prefWidth="158.0" text="data" />
+                              <TableColumn fx:id="tbl_aula1" prefWidth="152.0" text=" aula" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <TextField fx:id="tituloedt_field" layoutX="264.0" layoutY="66.0" prefHeight="37.0" prefWidth="431.0" promptText="Titulo" />
+            <DatePicker fx:id="dataedt_field" layoutX="497.0" layoutY="111.0" />
+            <Button fx:id="editarImg" layoutX="87.0" layoutY="293.0" mnemonicParsing="false" onAction="#onEditarImgClicked" text="Editar Imagem" />
+            <MenuBar layoutX="260.0" layoutY="110.0">
+               <menus>
+                  <Menu fx:id="categoriasedt_field" mnemonicParsing="false" text="Selecione a Categoria" />
+               </menus>
+            </MenuBar>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

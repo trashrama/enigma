@@ -33,9 +33,7 @@ public class CardPostController implements Initializable  {
 
 
 
-
-
-    public void setCurso(Post post){
+    public void setPost(Post post){
         this.post = post;
         titulo_post.setText(post.getTitulo());
         conteudo_post.setText(post.getConteudo());

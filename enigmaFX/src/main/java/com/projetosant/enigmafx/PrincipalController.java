@@ -45,8 +45,6 @@ import static com.projetosant.enigmafx.Application.usuarioLogado;
 
 public class PrincipalController implements Initializable {
 
-
-
     @FXML
     private static PrincipalController instance;
 
@@ -127,7 +125,8 @@ public class PrincipalController implements Initializable {
     @FXML
     private void onTblCursosClicked(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2){
-            Curso c = tbl_cursos.getSelectionModel().getSelectedItem();
+            Curso c = DaoFactory.createCursoDao().pesquisarPorID(tbl_cursos.getSelectionModel().getSelectedItem().getId());
+            System.out.println(c.getImg());
             invocaCurso("Curso.fxml", c.getTitulo(), c);
         }
 
@@ -211,27 +210,41 @@ public class PrincipalController implements Initializable {
 
     @FXML
     public void feed() throws IOException {
+
         feed.getItems().clear();
-        ObservableList<Post> posts = FXCollections.observableArrayList();
+        ObservableList<Post> posts;
 
-        if (usuarioLogado.isEh_instrutor()){
+        if (!usuarioLogado.isEh_instrutor()){
             posts = FXCollections.observableArrayList(DaoFactory.createPostDao().listarPostsCursosdoUsuario(usuarioLogado));
-
         }else {
             posts = FXCollections.observableArrayList(DaoFactory.createPostDao().listarPostsCursosdoInstrutor(usuarioLogado));
         }
-        for (Post p : posts) {
-            try {
-                FXMLLoader load = new FXMLLoader();
-                load.setLocation(getClass().getResource("CardPost.fxml"));
-                AnchorPane pane = load.load();
-                CardPostController cpc = load.getController();
-                cpc.setCurso(p);
 
-                feed.getItems().add(pane);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        if(posts.isEmpty()){
+            AnchorPane ap = new AnchorPane();
+            Label lbl_vazio = new Label("Não há posts para serem mostrados.");
+            ap.getChildren().add(lbl_vazio);
+            AnchorPane.setTopAnchor(lbl_vazio, 0.0);
+            AnchorPane.setBottomAnchor(lbl_vazio, 0.0);
+            AnchorPane.setLeftAnchor(lbl_vazio, 0.0);
+            AnchorPane.setRightAnchor(lbl_vazio, 0.0);
+
+            feed.getItems().add(ap);
+        }else{
+            for (Post p : posts) {
+                try {
+                    FXMLLoader load = new FXMLLoader();
+                    load.setLocation(getClass().getResource("CardPost.fxml"));
+                    AnchorPane pane = load.load();
+                    CardPostController cpc = load.getController();
+                    cpc.setPost(p);
+
+                    feed.getItems().add(pane);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+        }
+
         }
     }
 

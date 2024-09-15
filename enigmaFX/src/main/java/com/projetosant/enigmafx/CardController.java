@@ -3,6 +3,7 @@ package com.projetosant.enigmafx;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.utils.Imagem;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,10 +24,7 @@ public class CardController implements Initializable {
     @FXML
     private Label lbl_titulo_curso;
 
-    private Curso curso;
-
     public void setCurso(Curso c){
-        this.curso = c;
         lbl_titulo_curso.setText(c.getTitulo());
         img_imagem_curso.setImage(Imagem.bytesToImg(c.getImg()));
         lbl_autor_curso.setText(DaoFactory.createUsuarioDao().pesquisarPorID(c.getId_instrutor()).getNome());
@@ -36,4 +34,6 @@ public class CardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+
 }

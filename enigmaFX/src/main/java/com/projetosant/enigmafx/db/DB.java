@@ -13,7 +13,7 @@ public class DB {
         if (conn == null){
             String url = "jdbc:mysql://localhost:3306/enigma";
             String user = "root";
-            String psswd = "1234";
+            String psswd = "99586090";
 
             try{
                 conn = DriverManager.getConnection(url, user, psswd);

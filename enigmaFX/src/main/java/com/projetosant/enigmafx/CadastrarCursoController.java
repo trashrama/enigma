@@ -4,6 +4,7 @@ import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Curso;
 import com.projetosant.enigmafx.utils.Alerta;
+import com.projetosant.enigmafx.utils.Imagem;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -89,8 +90,9 @@ public class CadastrarCursoController implements Initializable {
     @FXML
     public void criarCurso() throws IOException {
         if (validacao()){
-            DaoFactory.createCursoDao().inserir(new Curso(curso_title.getText(),curso_desc.getText(), imgToBytes(), categoriasSelecionadas()));
+            DaoFactory.createCursoDao().inserir(new Curso(curso_title.getText(),curso_desc.getText(), Imagem.imgToBytes(fileImg), categoriasSelecionadas()));
             Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "", "Curso criado com sucesso!");
+            Application.geraTelas("Principal.fxml", "Principal");
         }
     }
 
@@ -113,13 +115,6 @@ public class CadastrarCursoController implements Initializable {
 
     }
 
-    private byte[] imgToBytes() throws IOException {
-
-        if (fileImg != null){
-            return Files.readAllBytes(fileImg.toPath());
-        }
-        return null;
-    }
 
 
     @Override

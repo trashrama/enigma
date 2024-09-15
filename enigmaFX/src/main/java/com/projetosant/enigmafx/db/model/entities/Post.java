@@ -23,6 +23,15 @@ public class Post {
         this.data_post = data_post;
     }
 
+    public Post(String titulo, String conteudo, byte[] aula, int id_curso, boolean eh_aula, LocalDate data_post) {
+        this.titulo = titulo;
+        this.conteudo = conteudo;
+        this.aula = aula;
+        this.id_curso = id_curso;
+        this.eh_aula = eh_aula;
+        this.data_post = data_post;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, titulo, conteudo, Arrays.hashCode(aula), id_curso, eh_aula);

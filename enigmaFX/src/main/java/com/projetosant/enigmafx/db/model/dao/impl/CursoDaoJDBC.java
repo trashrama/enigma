@@ -3,9 +3,7 @@ package com.projetosant.enigmafx.db.model.dao.impl;
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.CursoDao;
 import com.projetosant.enigmafx.db.model.entities.Curso;
-import com.projetosant.enigmafx.db.model.entities.Post;
 import com.projetosant.enigmafx.db.model.entities.Usuario;
-import com.projetosant.enigmafx.utils.Conversao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,7 +66,7 @@ public class CursoDaoJDBC implements CursoDao {
     }
 
     @Override
-    public void atualizar(Curso c) {
+    public boolean atualizar(Curso c) {
         //deletar cursos do id e depois add eles dnv
 
         PreparedStatement pst = null;
@@ -77,7 +75,7 @@ public class CursoDaoJDBC implements CursoDao {
         int adicionado = 0;
         int deletado = 0;
 
-        String in = "UPDATE curso SET titulo = ?, id_instrutor = ?, data_curso = ?, desc = ?, img = ? where id = ?";
+        String in = "UPDATE curso SET titulo = ?, id_instrutor = ?, data_curso = ?, descricao = ?, img = ? where id = ?";
 
         // tem que tratar a possivel excecao da categoria inserida, por algum motivo nao existir
         try {
@@ -95,6 +93,7 @@ public class CursoDaoJDBC implements CursoDao {
 
             if (adicionado > 0) {
                 System.out.println("Foi atualizado com sucesso!");
+                return true;
             } else {
                 System.out.println("Não foi possível inserir!");
             }
@@ -111,6 +110,7 @@ public class CursoDaoJDBC implements CursoDao {
         } finally {
             DB.closeStatement(pst);
         }
+        return false;
     }
     private void inserirCategorias(Curso c){
         PreparedStatement pst = null;
@@ -184,7 +184,7 @@ public class CursoDaoJDBC implements CursoDao {
 
 
     @Override
-    public void deletarPorID(int id) {
+    public boolean deletarPorID(int id) {
         PreparedStatement pst = null;
         String del = "DELETE from curso where id = ?";
         int deletado = 0;
@@ -193,6 +193,9 @@ public class CursoDaoJDBC implements CursoDao {
             pst = conn.prepareStatement(del);
             pst.setInt(1, id);
             deletado = pst.executeUpdate();
+            if (deletado > 0){
+                return true;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally{
@@ -201,6 +204,7 @@ public class CursoDaoJDBC implements CursoDao {
 
         deletarCategorias(id);
 
+        return false;
     }
 
     public int quantidadeAlunos(int ID) {
@@ -277,7 +281,7 @@ public class CursoDaoJDBC implements CursoDao {
 
             if(rs.next()){
                 return new Curso(ID, rs.getString("titulo"),
-                        rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), lerCategorias(ID));
+                        rs.getInt("id_instrutor"), rs.getDate("data_curso").toLocalDate(), lerCategorias(ID), rs.getBytes("img"), rs.getString("descricao"));
             }
 
 
