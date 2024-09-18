@@ -131,7 +131,11 @@ public class CursoController implements Initializable {
     }
     public void atualizarInterface(){
         if (curso != null) {
-            curso_img.setImage(Imagem.bytesToImg(curso.getImg()));
+            if (curso.getImg() == null){
+                curso_img.setImage(new Image(getClass().getResource("assets/photo.png").toExternalForm()));
+            }else{
+                curso_img.setImage(Imagem.bytesToImg(curso.getImg()));
+            }
 
             curso_titulo.setText(curso.getTitulo());
             curso_data.setText(curso.getData_curso().toString());

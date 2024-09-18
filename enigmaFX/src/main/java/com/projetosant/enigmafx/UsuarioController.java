@@ -60,7 +60,11 @@ public class UsuarioController implements Initializable {
 
     @FXML
     private void setarCampos(){
-        img_usr.setImage(Imagem.bytesToImg(usuarioLogado.getImg()));
+        if (usuarioLogado.getImg() == null){
+            img_usr.setImage(new Image(getClass().getResource("assets/user.png").toExternalForm()));
+        }else{
+            img_usr.setImage(Imagem.bytesToImg(usuarioLogado.getImg()));
+        }
         id_field.setText(String.valueOf(usuarioLogado.getId()));
         nome_field.setText(usuarioLogado.getNome());
         login_field.setText(usuarioLogado.getLogin());
@@ -84,6 +88,8 @@ public class UsuarioController implements Initializable {
             Application.geraTelas("Principal.fxml", "Principal");
             Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "", "Atualizado com sucesso!");
 
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.close();
             return;
         }
         Alerta.exibirAlerta(Alert.AlertType.ERROR, "", "Não foi possível atualizar.");
@@ -96,6 +102,8 @@ public class UsuarioController implements Initializable {
             if (DaoFactory.createUsuarioDao().deletarPorID(usuarioLogado.getId())){
                 Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "", "Conta deletada.");
                 Application.geraTelas("Inicial.fxml", "Tela Inicial");
+                Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                stage.close();
             }
         }
 

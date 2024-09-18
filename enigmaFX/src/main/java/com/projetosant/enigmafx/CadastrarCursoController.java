@@ -42,6 +42,7 @@ public class CadastrarCursoController implements Initializable {
     @FXML
     private ImageView img_curso;
 
+
     private File fileImg = null;
 
     private ArrayList<CheckMenuItem> carregarCategorias() {
@@ -114,7 +115,6 @@ public class CadastrarCursoController implements Initializable {
         Application.geraTelas("Principal.fxml", "Tela Principal");
 
     }
-
 
 
     @Override

@@ -26,7 +26,7 @@ create table curso (
     data_curso DATETIME not null,
 	img longblob,
     descricao TEXT,
-    foreign key (id_instrutor) references usuario(id) ON DELETE SET NULL
+    foreign key (id_instrutor) references usuario(id) ON DELETE CASCADE
 );
 
 create table curso_aluno (
@@ -184,7 +184,13 @@ VALUES
 -- selecionar posts pro feed
 SELECT * from post p inner join curso_aluno ca on p.id_curso = ca.id_curso where ca.id_aluno = 1 order by data_nasc;
 
+SELECT * from post p inner join curso c on p.id_curso = c.id where c.id_instrutor = 2 order by data_post
 
-select * from curso inner join curso.id = curso_aluno.id where id_aluno = 2
-
+select * from curso inner join curso_aluno on curso.id = curso_aluno.id_curso where id_aluno = 2
+use enigma;
+select * from post;
 drop database enigma;
+
+select * from usuario;
+
+select * from curso;
