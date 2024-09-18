@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CardController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CardController">
    <children>
       <ImageView fx:id="img_imagem_curso" fitHeight="200.0" fitWidth="130.0" layoutX="35.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lbl_titulo_curso" alignment="CENTER" layoutY="228.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="228.0">

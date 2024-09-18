@@ -286,7 +286,10 @@ public class PrincipalController implements Initializable {
         if(posts.isEmpty()){
             AnchorPane ap = new AnchorPane();
             Label lbl_vazio = new Label("Não há posts para serem mostrados.");
+            lbl_vazio.setStyle("-fx-text-fill: #212121");
+
             ap.getChildren().add(lbl_vazio);
+
             AnchorPane.setTopAnchor(lbl_vazio, 0.0);
             AnchorPane.setBottomAnchor(lbl_vazio, 0.0);
             AnchorPane.setLeftAnchor(lbl_vazio, 0.0);

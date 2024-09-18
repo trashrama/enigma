@@ -37,7 +37,7 @@
             <TextField fx:id="login_field" disable="true" editable="false" prefHeight="26.0" prefWidth="153.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Senha" GridPane.rowIndex="3" />
             <PasswordField fx:id="senha_field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <CheckBox fx:id="instrutor_field" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <CheckBox fx:id="instrutor_field" disable="true" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Instrutor" GridPane.rowIndex="4" />
          </children>
       </GridPane>

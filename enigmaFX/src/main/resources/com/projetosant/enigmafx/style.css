@@ -95,5 +95,15 @@
 .progress-bar {
     -fx-accent: #1f273f;
 }
+.date-picker .month-view .button {
+    -fx-text-fill: #000000;
+}
+
+.date-picker .month-view .label {
+    -fx-text-fill: #000000;
+}
 
 
+#card_pnl, #anchor_end{
+    -fx-background-color:#1f273f;
+}
