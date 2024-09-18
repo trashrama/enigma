@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CursoController">
+<StackPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CursoController">
    <children>
       <AnchorPane fx:id="pnl_curso" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0">
          <children>
@@ -36,7 +36,7 @@
             <Button fx:id="btn_matricular" layoutX="451.0" layoutY="324.0" mnemonicParsing="false" onAction="#fazerMatricula" text="Matricular-se" visible="false" AnchorPane.topAnchor="295.0" />
             <VBox layoutX="254.0" layoutY="158.0" maxHeight="150.0" maxWidth="474.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="127.0" prefWidth="474.0" AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="158.0">
                <children>
-                  <Text fx:id="curso_desc" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="295.0" />
+                  <Text fx:id="curso_desc" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="295.0" />
                </children>
             </VBox>
             <GridPane hgap="10.0" layoutX="254.0" layoutY="14.0" prefHeight="46.0" prefWidth="431.0">

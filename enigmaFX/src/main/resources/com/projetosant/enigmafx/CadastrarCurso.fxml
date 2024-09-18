@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CadastrarCursoController">
+<AnchorPane prefHeight="400.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.CadastrarCursoController">
    <children>
       <Label layoutX="340.0" layoutY="14.0" text="Cadastro de Curso" />
-      <Label layoutX="70.0" layoutY="77.0" text="Titulo" />
-      <Label layoutX="43.0" layoutY="100.0" text="Descricao" />
+      <Label fx:id="titulo_lbl_curso" layoutX="70.0" layoutY="77.0" text="Titulo" />
+      <Label fx:id="desc_lbl_curso" layoutX="43.0" layoutY="100.0" text="Descrição" />
       <TextField fx:id="curso_title" layoutX="119.0" layoutY="73.0" prefHeight="24.0" prefWidth="272.0" />
       <TextArea fx:id="curso_desc" layoutX="119.0" layoutY="100.0" prefHeight="99.0" prefWidth="272.0" />
       <Label layoutX="57.0" layoutY="222.0" />

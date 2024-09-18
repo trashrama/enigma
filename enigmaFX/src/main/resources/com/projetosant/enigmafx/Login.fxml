@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,17 +14,20 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetosant.enigmafx.LoginController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/bg-login.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="341.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="326.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/enigma-logo-big.png" />
+            <Image url="@img/enigma-logo-pink.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <GridPane layoutX="242.0" layoutY="172.0" prefHeight="102.0" prefWidth="317.0">
         <columnConstraints>
@@ -41,7 +45,10 @@
             <PasswordField fx:id="txt_senha" promptText="Digite sua senha" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="btn_login" layoutX="355.0" layoutY="274.0" mnemonicParsing="false" onAction="#onLogar" prefHeight="51.0" prefWidth="141.0" text="Logar" />
+      <Button fx:id="btn_login" layoutX="355.0" layoutY="274.0" mnemonicParsing="false" onAction="#onLogar" prefHeight="51.0" prefWidth="141.0" text="Logar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <ImageView fx:id="goBack" fitHeight="32.0" fitWidth="36.0" layoutX="37.0" layoutY="36.0" onMouseClicked="#onClickedGoBack" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/volte.png" />

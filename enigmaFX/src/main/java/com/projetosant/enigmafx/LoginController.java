@@ -66,7 +66,6 @@ public class LoginController implements Initializable {
 
                 if (rs.next()) {
                     Application.usuarioLogado = new Usuario(rs.getString("nome"), rs.getLong("xp"), rs.getDate("data_nasc").toLocalDate(), rs.getBoolean("eh_instrutor"), rs.getString("login"), rs.getString("senha"), rs.getInt("lvl_usuario"), rs.getInt("id"), rs.getBytes("img"), DaoFactory.createUsuarioDao().getInscricoes(rs.getInt("id")));
-                    System.out.println(Application.usuarioLogado);
                     Application.geraTelas("Principal.fxml", "Tela Principal");
                 } else {
                     Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "ERRO", "Login ou senha incorretos.");

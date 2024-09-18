@@ -84,7 +84,10 @@ public class UsuarioController implements Initializable {
 
         if(DaoFactory.createUsuarioDao().atualizar(new Usuario(nome_field.getText(), data_nasc_field.getValue(), login_field.getText(), senha_field.getText(), img, instrutor_field.isSelected(), usuarioLogado.getId()), usuarioLogado.getId())){
             usuarioLogado = new Usuario(nome_field.getText(), data_nasc_field.getValue(), login_field.getText(), senha_field.getText(), img, instrutor_field.isSelected(), usuarioLogado.getId());
-            System.out.println(usuarioLogado.isEh_instrutor());
+
+            Application.usuarioLogado.addXP(70);
+            DaoFactory.createUsuarioDao().atualizar(Application.usuarioLogado, Application.usuarioLogado.getId());
+
             Application.geraTelas("Principal.fxml", "Principal");
             Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "", "Atualizado com sucesso!");
 

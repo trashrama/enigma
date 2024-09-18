@@ -3,6 +3,7 @@ package com.projetosant.enigmafx;
 import com.projetosant.enigmafx.db.DB;
 import com.projetosant.enigmafx.db.model.dao.DaoFactory;
 import com.projetosant.enigmafx.db.model.entities.Curso;
+import com.projetosant.enigmafx.db.model.entities.Usuario;
 import com.projetosant.enigmafx.utils.Alerta;
 import com.projetosant.enigmafx.utils.Imagem;
 import javafx.fxml.FXML;
@@ -93,6 +94,9 @@ public class CadastrarCursoController implements Initializable {
         if (validacao()){
             DaoFactory.createCursoDao().inserir(new Curso(curso_title.getText(),curso_desc.getText(), Imagem.imgToBytes(fileImg), categoriasSelecionadas()));
             Alerta.exibirAlerta(Alert.AlertType.INFORMATION, "", "Curso criado com sucesso!");
+            Application.usuarioLogado.addXP(50);
+
+            DaoFactory.createUsuarioDao().atualizar(Application.usuarioLogado, Application.usuarioLogado.getId());
             Application.geraTelas("Principal.fxml", "Principal");
         }
     }

@@ -50,7 +50,6 @@ public class PrincipalController implements Initializable {
     @FXML
     private GridPane menu_pnl;
 
-
     @FXML
     private Label btn_catalogo;
 
@@ -118,6 +117,10 @@ public class PrincipalController implements Initializable {
     private ComboBox<String> filtrar_cat_cbbx;
 
     private Map<String,Integer > categorias = new HashMap<>();
+
+    @FXML
+    private ProgressBar progresso_xp;
+
 
     private void carregarCategorias() {
 
@@ -381,6 +384,7 @@ public class PrincipalController implements Initializable {
             usr_lvl.setText("LVL: " + Application.usuarioLogado.getLvl_usuario());
             xp_usr.setText("XP: " + Application.usuarioLogado.getXp());
             btn_cad_curso.setVisible(Application.usuarioLogado.isEh_instrutor());
+            progresso_xp.setProgress((double) usuarioLogado.getXp() /100);
             setMenu();
             popularCursos();
             carregarCategorias();

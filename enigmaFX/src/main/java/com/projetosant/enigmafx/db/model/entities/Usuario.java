@@ -137,6 +137,29 @@ public class Usuario {
         this.xp = xp;
     }
 
+    public void addXP(int qtdXp) {
+        if (this.getXp() + qtdXp >=100){
+            this.setLvl_usuario(this.getLvl_usuario()+1);
+            this.setXp(this.getXp() + qtdXp - 100);
+        }else{
+            this.setXp(this.getXp()+qtdXp);
+        }
+    }
+    public void removeXP(int qtdXp) {
+        if (this.getXp() - qtdXp < 0) {
+            if (this.getLvl_usuario() > 1) {
+                this.setLvl_usuario(this.getLvl_usuario() - 1);
+                this.setXp(100 + (this.getXp() - qtdXp));
+            } else {
+                this.setXp(0);
+            }
+        } else {
+            this.setXp(this.getXp() - qtdXp);
+        }
+    }
+
+
+
     public LocalDate getData_nasc() {
         return data_nasc;
     }

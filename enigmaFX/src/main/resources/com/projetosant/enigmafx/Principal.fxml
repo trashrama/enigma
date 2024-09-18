@@ -24,7 +24,7 @@
    <children>
       <AnchorPane fx:id="usuario_pnl" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ProgressBar layoutX="35.0" layoutY="247.0" prefHeight="20.0" prefWidth="139.0" progress="0.0" />
+            <ProgressBar fx:id="progresso_xp" layoutX="35.0" layoutY="247.0" prefHeight="20.0" prefWidth="139.0" progress="0.0" />
             <Label fx:id="usr_lvl" layoutX="32.0" layoutY="217.0" text="Label" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
@@ -59,7 +59,7 @@
       </AnchorPane>
       <StackPane layoutX="200.0" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <AnchorPane fx:id="principal_pnl" prefHeight="400.0" prefWidth="600.0" visible="false">
+            <AnchorPane fx:id="principal_pnl" prefHeight="400.0" prefWidth="600.0">
                <children>
                   <GridPane fx:id="menu_pnl" alignment="CENTER" layoutX="147.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="416.0">
                     <columnConstraints>
@@ -114,7 +114,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="curso_pnl" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
+            <AnchorPane fx:id="curso_pnl" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css" visible="false">
                <children>
                   <Label fx:id="seus_cursos_lbl" layoutX="260.0" layoutY="48.0" text="Seus Cursos" textFill="#d0d0d0">
                      <font>

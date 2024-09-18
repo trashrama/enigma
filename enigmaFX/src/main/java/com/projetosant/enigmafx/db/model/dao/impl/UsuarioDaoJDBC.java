@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.projetosant.enigmafx.Application.usuarioLogado;
+
 public class UsuarioDaoJDBC implements UsuarioDao {
 
     private Connection conn = null;
@@ -116,7 +118,7 @@ public class UsuarioDaoJDBC implements UsuarioDao {
     @Override
     public boolean atualizar(Usuario u, int ID) {
         PreparedStatement pst = null;
-        String in = "UPDATE usuario SET nome = ?, data_nasc = ?, eh_instrutor = ?, login = ?, senha = ?, img = ? WHERE id = ?";
+        String in = "UPDATE usuario SET nome = ?, data_nasc = ?, eh_instrutor = ?, login = ?, senha = ?, img = ?, xp = ?, lvl_usuario = ? WHERE id = ?";
         int atualizado = 0;
 
         try {
@@ -127,7 +129,10 @@ public class UsuarioDaoJDBC implements UsuarioDao {
             pst.setString(4, u.getLogin());
             pst.setString(5, u.getSenha());
             pst.setBytes(6, u.getImg());
-            pst.setInt(7, ID);
+            pst.setInt(9, ID);
+            pst.setLong(7, u.getXp());
+            pst.setInt(8, u.getLvl_usuario());
+
 
             atualizado = pst.executeUpdate();
 
@@ -174,6 +179,8 @@ public class UsuarioDaoJDBC implements UsuarioDao {
         }
         return null;
     }
+
+
 
 
     @Override

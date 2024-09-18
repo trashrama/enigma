@@ -1,31 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
 
 #principal_pnl{
-    -fx-background-color: #202020;
+    -fx-background-color: #0e1323;
 }
-.scrollPane, #feed, #curso_pnl, #tbl_cursos{
-    -fx-background-color:#212121;
+.root, .scrollPane, #feed, #curso_pnl, #tbl_cursos{
+    -fx-background-color:#1f273f;
+}
+
+#btn_sair{
+    -fx-background-color: #d84b6f;
+
 }
 
 #usuario_pnl{
     -fx-background-color: #F2668B;
-    
+
 }
 
-.label, .button{
+.label, .button, .text{
     -fx-font-family:Roboto;
-} 
-
-#seus_cursos_lbl{
-    --fx-color: white;
-    font-family: Roboto;
-    font-weight: 700;
-  font-style: normal;
-
+    -fx-text-fill: white;
 }
 
 
-#tbl_cursos{
+.table-view{
     -fx-background-color: linear-gradient(#F2668B 0%, #0d2986 100%);
     -fx-background-radius: 7px;
     -fx-border-color: #f0a1b6;
@@ -41,6 +40,60 @@
 .table-view .column-header-background{
     -fx-background-color: transparent;
 }
-.table-view .column-header-background .label{
-    -fx-text-fill: white;
+
+#btn_meus_cursos, #btn_cad_curso, #btn_catalogo, #btn_meu_perfil{
+    -fx-text-fill: #F2668B;
+
 }
+
+
+#btn_login, #btn_cadastro{
+  -fx-font-family: Roboto;
+  -fx-font-weight: 700;
+  -fx-font-size: 15px;
+  -fx-font-style: normal;
+  -fx-background-color: #F2668B;
+  -fx-text-fill: white;
+  -fx-border: none;
+  -fx-text-align: center;
+  -fx-text-decoration: none;
+}
+
+
+
+.button{
+  -fx-font-family: Roboto;
+  -fx-font-weight: 700;
+  -fx-font-style: normal;
+  -fx-background-color: #F2668B;
+  -fx-text-fill: white;
+  -fx-border: none;
+  -fx-text-align: center;
+  -fx-text-decoration: none;
+}
+#btn_sou_instrutor{
+  -fx-background-color: #051138;
+
+}
+
+#titulo_post, #titulo_lbl_curso, #desc_lbl_curso{
+  -fx-font-family: Roboto;
+  -fx-font-weight: 900;
+}
+
+.menu-bar {
+    -fx-background-color: #333333;
+}
+
+.menu,
+.menu-item{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color:#333333;
+
+}
+
+.progress-bar {
+    -fx-accent: #1f273f;
+}
+
+
